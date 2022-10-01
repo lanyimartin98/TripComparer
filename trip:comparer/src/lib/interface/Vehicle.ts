@@ -1,4 +1,4 @@
-import { VehicleModel } from './VehicleModel';
+import type { VehicleModel } from './VehicleModel';
 
 export interface Vehicle {
 	type: 'vehicle';

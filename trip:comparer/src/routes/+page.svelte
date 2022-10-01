@@ -1,3 +1,7 @@
 <main>
-    This is my new project
+    <ComaprisonObject/>
 </main>
+
+<script lang="ts">
+import ComaprisonObject from "../component/comaprisonObject.svelte";
+</script>
