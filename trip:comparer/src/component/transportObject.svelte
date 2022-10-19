@@ -1,4 +1,4 @@
-<section class="border-cyan-500 border-2 p-4 rounded-md flex flex-col text-lg">
+<section class="border-cyan-500 border-2 p-4 rounded-md flex flex-col text-lg m-4">
     <div>
     <label for="type">Type:</label>
     <select name="type" class="bg-black border-cyan-500" bind:value={transport}>
@@ -16,7 +16,7 @@
 <script lang="ts">
 	import type { Leg } from "$lib/interface/Leg";
     import type{Flight} from "$lib/interface/Flight";
-	import type { TransportObj } from "$lib/interface/TrabsportObj";
+	import type { TransportObj } from "$lib/interface/TransportObj";
 	import type { Vehicle } from "$lib/interface/Vehicle";
 	import type { VehicleModel } from "$lib/interface/VehicleModel";
 
@@ -25,24 +25,16 @@
 
     $: changeTransport(transport);
 
-    let transportObj:TransportObj={
-        type:null
-    }
+    export let transportObj:TransportObj;
 
     let transport=""
-    let legs:Leg[]=[
-        {
-            departure_airport: "",
-	        destination_airport:""
-        }
-    ]
 
     const changeTransport=(value:String)=>{
 
         if(value==="Flight"){
             const flight:Flight={
                 type: 'flight',
-	            passengers: 0,
+	            passengers: 1,
 	            legs:[
                     {
                         departure_airport: "",
@@ -65,13 +57,12 @@
             }
             transportObj.type=vehicle
         }
-        console.log(transportObj.type)
     }
 
 </script>
 
 <style>
     div{
-        padding:0.1em
+        @apply p-1
     }
 </style>

@@ -3,3 +3,9 @@
     <div><a href=""><i class="bi bi-github"></i></a>
     <a href=""><i class="bi bi-linkedin"></i></a></div>
 </nav>
+
+<style>
+    a:hover{
+        @apply text-white;
+    }
+</style>

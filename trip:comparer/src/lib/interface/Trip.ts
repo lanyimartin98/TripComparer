@@ -1,6 +1,6 @@
-import { TransportObj } from './TrabsportObj';
+import type { TransportObj } from './TransportObj';
 
 export interface Trip {
 	transport_obj: TransportObj[];
-	carbon_g: number;
+	carbon_g: number | null;
 }
