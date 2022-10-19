@@ -1,10 +1,10 @@
 # TODO
 
-[x] Types and interfaces
-[x] User Interface implementation
-[ ] Mock data
-[ ] API implementation (Sending and receiving data)
-[ ] Business Logic of Comparing
+- [x] Types and interfaces
+- [x] User Interface implementation
+- [ ] Mock data
+- [ ] API implementation (Sending and receiving data)
+- [ ] Business Logic of Comparing
 
 # Interfaces
 
