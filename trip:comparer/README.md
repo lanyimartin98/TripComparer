@@ -1,7 +1,7 @@
 # TODO
 
 [x] Types and interfaces
-[ ] User Interface implementation
+[x] User Interface implementation
 [ ] Mock data
 [ ] API implementation (Sending and receiving data)
 [ ] Business Logic of Comparing

@@ -1,35 +1,54 @@
-<main class="flex flex-wrap flex-row justify-evenly">
-    <ComparisonObject transportObjects={tripsObj[0].transport_obj}/>
-    <ComparisonObject transportObjects={tripsObj[1].transport_obj}/>
-</main>
-<section class="flex justify-center">
-<button on:click={()=>compare()}>Compare <i class="bi bi-search"></i></button>
-<button>Reset <i class="bi bi-x-circle-fill"></i></button>
-</section>
-
 <script lang="ts">
-import ComparisonObject from "../component/comparisonObject.svelte";
-import type { Trip } from "$lib/interface/Trip";
+	import ComparisonObject from '../component/comparisonObject.svelte';
+	import ResultsComponent from '../component/results.svelte';
+	import type { Trip } from '$lib/interface/Trip';
 
-let tripsObj:Trip[]=[
-	{
-		transport_obj: [{ type: null }],
-		carbon_g: null
-	},
-	{
-		transport_obj: [{ type: null }],
-		carbon_g: null
-	}
-];
+	let compared: Boolean = false;
+	let unique = {};
 
-const compare=()=>{
-    console.log(tripsObj);
-}
+	let tripsObj: Trip[] = [
+		{
+			transport_obj: [{ type: null }],
+			carbon_g: null
+		},
+		{
+			transport_obj: [{ type: null }],
+			carbon_g: null
+		}
+	];
 
+	const compare = () => {
+		compared = true;
+		console.log(tripsObj);
+	};
+
+	const reset = () => {
+		unique = {};
+		const obj: Trip[] = [
+			{
+				transport_obj: [{ type: null }],
+				carbon_g: null
+			},
+			{
+				transport_obj: [{ type: null }],
+				carbon_g: null
+			}
+		];
+
+		tripsObj = obj;
+	};
 </script>
 
-<style>
-    button{
-        @apply text-2xl p-4;
-    }
-</style>
+{#key unique}
+	<main class="flex flex-wrap flex-row justify-evenly">
+		<ComparisonObject bind:transportObjects={tripsObj[0].transport_obj} />
+		<ComparisonObject bind:transportObjects={tripsObj[1].transport_obj} />
+	</main>
+{/key}
+<section class="flex justify-center">
+	<button on:click={() => compare()}>Compare <i class="bi bi-search" /></button>
+	<button on:click={() => reset()}>Reset <i class="bi bi-x-circle-fill" /></button>
+</section>
+{#if compared}
+	<ResultsComponent left_carbon="0" right_carbon="0" />
+{/if}
