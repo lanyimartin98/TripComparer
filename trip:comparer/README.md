@@ -2,7 +2,7 @@
 
 - [x] Types and interfaces
 - [x] User Interface implementation
-- [ ] Mock data
+- [x] Mock data
 - [ ] API implementation (Sending and receiving data)
 - [ ] Business Logic of Comparing
 

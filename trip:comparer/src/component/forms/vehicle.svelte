@@ -1,7 +1,24 @@
 <script lang="ts">
 	import type { Vehicle } from '$lib/interface/Vehicle';
+	import type { VehicleModel } from '$lib/interface/VehicleModel';
+	import { onMount } from 'svelte';
+	import axios from 'axios';
+	import { dataset_dev } from 'svelte/internal';
 
 	export let vehicle: Vehicle;
+
+	export let makes:any[];
+	export let models:any[];
+
+	onMount(async()=>{
+		const resp=await axios.post("http://localhost:5173/api/make");
+		makes=resp.data;
+	})
+
+	const retrieveModel=async()=>{
+		const resp=await axios.post("http://localhost:5173/api/model");
+		models=resp.data;
+	}
 </script>
 
 <article>
@@ -18,17 +35,23 @@
 	</div>
 	<div>
 		<label for="make">Make:</label>
-		<select name="make" id="make" bind:value={vehicle.vehicle_model.vehicle_make_id}>
-			<option value="1">BMW</option>
-			<option value="2">Mercedes</option>
+		<select name="make" id="make" bind:value={vehicle.vehicle_model.vehicle_make_id} on:change={retrieveModel}>
+		{#if makes!==undefined}
+			{#each makes as make}
+				<option value={make.data.id}>{make.data.attributes.name}</option>
+			{/each}
+		{/if}
 		</select>
 	</div>
 	{#if vehicle.vehicle_model.vehicle_make_id !== ''}
 		<div>
 			<label for="model">Model:</label>
 			<select name="model" id="model">
-				<option value="">323ci</option>
-				<option value="">325i</option>
+				{#if models!==undefined}
+					{#each models as model}
+						<option value={model.data.id}>{model.data.attributes.name}</option>
+					{/each}
+				{/if}
 			</select>
 		</div>
 	{/if}
