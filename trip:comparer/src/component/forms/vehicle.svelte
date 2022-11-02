@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { Vehicle } from '$lib/interface/Vehicle';
-	import type { VehicleModel } from '$lib/interface/VehicleModel';
 	import { onMount } from 'svelte';
 	import axios from 'axios';
-	import { dataset_dev } from 'svelte/internal';
+	import{PUBLIC_LEAN_URL} from '$env/static/public';
 
 	export let vehicle: Vehicle;
 
@@ -11,12 +10,12 @@
 	export let models:any[];
 
 	onMount(async()=>{
-		const resp=await axios.post("http://localhost:5173/api/make");
+		const resp=await axios.get(`${PUBLIC_LEAN_URL}/make`);
 		makes=resp.data;
 	})
 
 	const retrieveModel=async()=>{
-		const resp=await axios.post("http://localhost:5173/api/model");
+		const resp=await axios.post(`${PUBLIC_LEAN_URL}/model`);
 		models=resp.data;
 	}
 </script>

@@ -10,7 +10,11 @@ const config = {
 	}),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		env: {
+			dir: process.cwd(),
+			publicPrefix: 'PUBLIC_'
+		  },
 	}
 };
 

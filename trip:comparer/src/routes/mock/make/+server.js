@@ -1,4 +1,4 @@
-export function POST(){
+export function GET(){
     const resp=[
         {
             "data": {
