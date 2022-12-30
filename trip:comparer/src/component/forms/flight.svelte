@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Flight } from '$lib/interface/Flight';
 	import type { Leg } from '$lib/interface/Leg';
+	import { scale } from 'svelte/transition';
 	export let flight: Flight;
 
 	const increasePassenger = () => {
@@ -21,19 +22,29 @@
 		const combinedLeg = flight.legs.concat(newLeg);
 		flight.legs = combinedLeg;
 	};
+
+	const removeLeg = (leg: Leg) => {
+		const legs = flight.legs.filter((l) => {
+			if (l !== leg) {
+				return l;
+			}
+		});
+
+		flight.legs = legs;
+	};
 </script>
 
-<article>
+<article in:scale>
 	<h3>Flights:</h3>
 	<div>
 		{#each flight.legs as leg}
-			<div>
+			<div transition:scale>
 				<label for="dep">Departure:</label>
-				<input type="text" />
+				<input type="text" bind:value={leg.departure_airport} />
 				<label for="dest">Destination:</label>
-				<input type="text" />
+				<input type="text" bind:value={leg.destination_airport} />
 				{#if Object.keys(flight.legs).length > 1}
-					<button><i class="bi bi-x-circle-fill" /></button>
+					<button on:click={() => removeLeg(leg)}><i class="bi bi-x-circle-fill" /></button>
 				{/if}
 				<button on:click={() => addLeg()}><i class="bi bi-plus-circle-fill" /></button>
 			</div>

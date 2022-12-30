@@ -36,6 +36,7 @@
 		];
 
 		tripsObj = obj;
+		compared = false;
 	};
 </script>
 

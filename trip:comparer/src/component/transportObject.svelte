@@ -7,6 +7,7 @@
 
 	import FlightForm from './forms/flight.svelte';
 	import VehicleForm from './forms/vehicle.svelte';
+	import { scale } from 'svelte/transition';
 
 	$: changeTransport(transport);
 
@@ -44,7 +45,7 @@
 	};
 </script>
 
-<section class="border-cyan-500 border-2 p-4 rounded-md flex flex-col text-lg m-4">
+<section class="border-cyan-500 border-2 p-4 rounded-md flex flex-col text-lg m-4" in:scale>
 	<div>
 		<label for="type">Type:</label>
 		<select name="type" bind:value={transport}>

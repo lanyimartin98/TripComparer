@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { scale } from 'svelte/transition';
+
 	export let left_carbon: string;
 	export let right_carbon: string;
 </script>
 
-<article class="border-cyan-500 border-2 p-4 rounded-md flex flex-col text-lg m-4">
+<article class="border-cyan-500 border-2 p-4 rounded-md flex flex-col text-lg m-4" transition:scale>
 	<div class="flex justify-evenly">
 		<div>
 			Carbon footprint of the option A is: {left_carbon};
