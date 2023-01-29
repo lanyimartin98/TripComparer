@@ -8,10 +8,14 @@
 	import FlightForm from './forms/flight.svelte';
 	import VehicleForm from './forms/vehicle.svelte';
 	import { scale } from 'svelte/transition';
+	import { createEventDispatcher } from 'svelte';
 
 	$: changeTransport(transport);
 
 	export let transportObj: TransportObj;
+	export let numberOfTransportObjects: number;
+
+	const dispatch = createEventDispatcher();
 
 	let transport = '';
 
@@ -43,15 +47,27 @@
 			transportObj.type = vehicle;
 		}
 	};
+
+	const deleteTransportObject = () => {
+		dispatch('delete', {
+			object: transportObj
+		});
+	};
 </script>
 
 <section class="border-cyan-500 border-2 p-4 rounded-md flex flex-col text-lg m-4" in:scale>
-	<div>
-		<label for="type">Type:</label>
-		<select name="type" bind:value={transport}>
-			<option value="Flight">flight</option>
-			<option value="Vehicle">vehicle</option>
-		</select>
+	<div class="flex flex-row justify-between">
+		<div>
+			<label for="type">Type:</label>
+			<select name="type" bind:value={transport}>
+				<option value="Flight">flight</option>
+				<option value="Vehicle">vehicle</option>
+			</select>
+		</div>
+
+		{#if numberOfTransportObjects > 1}
+			<button><i class="bi bi-x-circle-fill" on:click={() => deleteTransportObject()} /></button>
+		{/if}
 	</div>
 	{#if transport === 'Flight'}
 		<FlightForm bind:flight={transportObj.type} />

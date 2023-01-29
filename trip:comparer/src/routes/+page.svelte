@@ -19,7 +19,7 @@
 
 	const compare = () => {
 		compared = true;
-		console.log(tripsObj);
+		console.log(JSON.stringify(tripsObj));
 	};
 
 	const reset = () => {
