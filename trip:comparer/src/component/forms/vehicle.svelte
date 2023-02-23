@@ -17,8 +17,8 @@
 	});
 
 	const retrieveModel = async () => {
-		const resp = await axios.post(
-			`${PUBLIC_LEAN_URL}/vehicle_makes/${vehicle.vehicle_model.vehicle_make_id}`
+		const resp = await axios.get(
+			`${PUBLIC_LEAN_URL}/vehicle_makes/model?id=${vehicle.vehicle_model.vehicle_make_id}`
 		);
 		models = resp.data;
 	};
