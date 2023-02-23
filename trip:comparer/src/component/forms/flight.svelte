@@ -39,10 +39,23 @@
 	<div>
 		{#each flight.legs as leg}
 			<div transition:scale>
-				<label for="dep">Departure:</label>
+				<label for="dep">Departure (IATA code):</label>
 				<input type="text" bind:value={leg.departure_airport} />
-				<label for="dest">Destination:</label>
+				<label for="dest">Destination (IATA code):</label>
 				<input type="text" bind:value={leg.destination_airport} />
+				<div class="inline-block">
+					<div class="group flex relative">
+						<a
+							href="https://www.iata.org/en/publications/directories/code-search/"
+							target="_blank"
+							class="hover:text-cyan-500"><span><i class="bi bi-question-circle" /></span></a
+						>
+						<span
+							class="w-48 text-center group-hover:opacity-100 transition-opacity bg-cyan-500 px-1 text-sm text-gray-100 rounded-md absolute left-1/2 -top-16
+						-translate-x-1/2 translate-y-full opacity-0 m-4 mx-auto">More info on IATA codes.</span
+						>
+					</div>
+				</div>
 				{#if Object.keys(flight.legs).length > 1}
 					<button on:click={() => removeLeg(leg)}><i class="bi bi-x-circle-fill" /></button>
 				{/if}
