@@ -2,6 +2,9 @@
 	import ComparisonObject from '../component/comparisonObject.svelte';
 	import ResultsComponent from '../component/results.svelte';
 	import type { Trip } from '$lib/interface/Trip';
+	import { onMount } from 'svelte';
+	import { getAllAirports } from '$lib/stores/airportStore';
+	import { getAllMakes } from '$lib/stores/vehicleStore';
 
 	let compared: Boolean = false;
 	let unique = {};
@@ -38,6 +41,11 @@
 		tripsObj = obj;
 		compared = false;
 	};
+
+	onMount(async () => {
+		getAllAirports();
+		getAllMakes();
+	});
 </script>
 
 {#key unique}

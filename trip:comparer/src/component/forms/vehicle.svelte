@@ -5,28 +5,28 @@
 	import { PUBLIC_LEAN_URL } from '$env/static/public';
 
 	import { scale } from 'svelte/transition';
+	import { getModelsById, makeStore } from '$lib/stores/vehicleStore';
+	import type { Make } from '$lib/interface/Make';
 
 	export let vehicle: Vehicle;
 
-	export let makes: any[];
-	export let models: any[];
+	export let makes: Make[];
+	export let models: Model[];
 
 	let loadingMakes: boolean = false;
 	let loadingModels: boolean = false;
 
 	onMount(async () => {
 		loadingMakes = true;
-		const resp = await axios.get(`${PUBLIC_LEAN_URL}/vehicle_makes`);
-		makes = resp.data;
+		makeStore.subscribe((data) => {
+			makes = data;
+		});
 		loadingMakes = false;
 	});
 
 	const retrieveModel = async () => {
 		loadingModels = true;
-		const resp = await axios.get(
-			`${PUBLIC_LEAN_URL}/vehicle_makes/model?id=${vehicle.vehicle_model.vehicle_make_id}`
-		);
-		models = resp.data;
+		models=await getModelsById(vehicle.vehicle_model.vehicle_make_id)
 		loadingModels = false;
 	};
 </script>
@@ -54,7 +54,7 @@
 			>
 				{#if makes !== undefined}
 					{#each makes as make}
-						<option value={make.data.id}>{make.data.attributes.name}</option>
+						<option value={make.id}>{make.name}</option>
 					{/each}
 				{/if}
 			</select>

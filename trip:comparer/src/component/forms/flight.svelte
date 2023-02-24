@@ -1,7 +1,15 @@
 <script lang="ts">
+	import type { Airport } from '$lib/interface/Airport';
 	import type { Flight } from '$lib/interface/Flight';
 	import type { Leg } from '$lib/interface/Leg';
+	import { onMount } from 'svelte';
 	import { scale } from 'svelte/transition';
+	import axios from 'axios';
+	import { PUBLIC_LEAN_URL } from '$env/static/public';
+	import { airportStore } from '$lib/stores/airportStore';
+
+	let airports: Airport[];
+
 	export let flight: Flight;
 
 	const increasePassenger = () => {
@@ -32,6 +40,12 @@
 
 		flight.legs = legs;
 	};
+
+	onMount(async () => {
+		airportStore.subscribe((data) => {
+			airports = data;
+		});
+	});
 </script>
 
 <article in:scale>
@@ -39,10 +53,22 @@
 	<div>
 		{#each flight.legs as leg}
 			<div transition:scale>
-				<label for="dep">Departure (IATA code):</label>
-				<input type="text" bind:value={leg.departure_airport} />
-				<label for="dest">Destination (IATA code):</label>
-				<input type="text" bind:value={leg.destination_airport} />
+				<label for="dep">Departure:</label>
+				<select name="dep" id="dep" bind:value={leg.departure_airport}>
+					{#if airports !== undefined}
+						{#each airports as airport}
+							<option value={airport.IATA}>{airport.name}</option>
+						{/each}
+					{/if}
+				</select>
+				<label for="dest">Destination:</label>
+				<select name="dest" id="dest" bind:value={leg.destination_airport}>
+					{#if airports !== undefined}
+						{#each airports as airport}
+							<option value={airport.IATA}>{airport.name}</option>
+						{/each}
+					{/if}
+				</select>
 				<div class="inline-block">
 					<div class="group flex relative">
 						<a
