@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import { getAllAirports } from '$lib/stores/airportStore';
 	import { getAllMakes } from '$lib/stores/vehicleStore';
+	import { formValidate } from '$lib/helper/formValidator';
 
 	let compared: Boolean = false;
 	let unique = {};
@@ -22,7 +23,8 @@
 
 	const compare = () => {
 		compared = true;
-		console.log(JSON.stringify(tripsObj));
+		console.log(tripsObj[0].transport_obj[0]);
+		console.log(formValidate(tripsObj[0].transport_obj[0]));
 	};
 
 	const reset = () => {
@@ -47,6 +49,22 @@
 		getAllMakes();
 	});
 </script>
+
+<article class="bg-cyan-500 p-4 w-full">
+	Hello dear visitor! This is a portfolio project of mine, which utilizes FlightLAB's airport API
+	and the Carbon Interface. You can use it to compare your options of travel in case of it's
+	emissions. Please keep in mind that this is not a prodcution app, more like a demo of my frontend
+	skills. If you find it useful please do not hesitate to help the incredible work of these to API
+	developer teams!
+	<br />Tech stack:
+	<ul class="list-disc list-inside">
+		<li>Sveltekit</li>
+		<li>TailwindCSS</li>
+		<li>TRPC</li>
+		<li>Zod</li>
+	</ul>
+	If you are interested in my work check out my Github or LindkedIn page!
+</article>
 
 {#key unique}
 	<main class="flex flex-wrap flex-row justify-evenly">

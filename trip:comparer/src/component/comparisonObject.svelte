@@ -11,14 +11,11 @@
 		};
 		const combinedTransportObject = transportObjects.concat(newTransObject);
 		transportObjects = combinedTransportObject;
-		console.log(transportObjects);
 	};
 
 	const deleteTransportObject = (event: any) => {
-		console.log(event);
 		const filteredTransportObejcts = transportObjects.filter((t) => {
 			if (t !== event.detail.object) {
-				console.log(t);
 				return t;
 			}
 		});

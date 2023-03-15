@@ -19,7 +19,6 @@ export const getAllMakes = async () => {
 		return responseMakes;
 	});
 };
-
 export const getModelsById = async (id: String) => {
 	const resp = await axios.get(`${PUBLIC_LEAN_URL}/vehicle_makes/model?id=${id}`);
 	const responseModels: Model[] = resp.data.map((m: any) => {

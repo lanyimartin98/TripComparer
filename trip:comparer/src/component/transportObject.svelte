@@ -41,7 +41,7 @@
 			const vehicle: Vehicle = {
 				type: 'vehicle',
 				distance_unit: 'km',
-				distance_value: 0,
+				distance_value: undefined,
 				vehicle_model: vehicleModel
 			};
 			transportObj.type = vehicle;

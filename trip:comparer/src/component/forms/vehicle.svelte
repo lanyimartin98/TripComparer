@@ -7,6 +7,7 @@
 	import { scale } from 'svelte/transition';
 	import { getModelsById, makeStore } from '$lib/stores/vehicleStore';
 	import type { Make } from '$lib/interface/Make';
+	import type { Model } from '$lib/interface/Model';
 
 	export let vehicle: Vehicle;
 
@@ -26,7 +27,7 @@
 
 	const retrieveModel = async () => {
 		loadingModels = true;
-		models=await getModelsById(vehicle.vehicle_model.vehicle_make_id)
+		models = await getModelsById(vehicle.vehicle_model.vehicle_make_id);
 		loadingModels = false;
 	};
 </script>
@@ -34,14 +35,14 @@
 <article in:scale>
 	<div>
 		<label for="distance_un">Distance unit:</label>
-		<select name="distance_un" id="distance_un">
+		<select name="distance_un" id="distance_un" bind:value={vehicle.distance_unit}>
 			<option value="mi">miles</option>
 			<option value="km">kilometers</option>
 		</select>
 	</div>
 	<div>
 		<label for="distance">Distance:</label>
-		<input type="text" name="distance" id="distance" />
+		<input type="number" name="distance" id="distance" bind:value={vehicle.distance_value} />
 	</div>
 	<div>
 		<label for="make">Make:</label>
@@ -66,10 +67,10 @@
 		<div in:scale>
 			<label for="model">Model:</label>
 			{#if !loadingModels}
-				<select name="model" id="model">
+				<select name="model" id="model" bind:value={vehicle.vehicle_model.vehicle_model_id}>
 					{#if models !== undefined}
 						{#each models as model}
-							<option value={model.data.id}>{model.data.attributes.name}</option>
+							<option value={model.id}>{model.name}</option>
 						{/each}
 					{/if}
 				</select>
