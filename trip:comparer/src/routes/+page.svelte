@@ -6,9 +6,11 @@
 	import { getAllAirports } from '$lib/stores/airportStore';
 	import { getAllMakes } from '$lib/stores/vehicleStore';
 	import { formValidate } from '$lib/helper/formValidator';
+	import Error from '../component/utilities/error.svelte';
 
 	let compared: Boolean = false;
 	let unique = {};
+	let errors: string[] = [];
 
 	let tripsObj: Trip[] = [
 		{
@@ -21,10 +23,40 @@
 		}
 	];
 
+	const hideError = (event: any) => {
+		const errorText = event.detail.object;
+		const filteredErrors = errors.filter((error) => {
+			if (error !== errorText) {
+				return error;
+			}
+		});
+		errors = filteredErrors;
+	};
+
 	const compare = () => {
-		compared = true;
-		console.log(tripsObj[0].transport_obj[0]);
-		console.log(formValidate(tripsObj[0].transport_obj[0]));
+		let success: boolean = true;
+		let error: string[] = [];
+		console.log(tripsObj);
+		tripsObj.forEach((trip) => {
+			trip.transport_obj.forEach((transport) => {
+				const validation = formValidate(transport);
+				if (validation === undefined) {
+					success = false;
+					error.push('One or more transport object(s) is/are empty!');
+					return;
+				}
+				if (validation.success === false) {
+					success = false;
+					validation.error.errors.forEach((validationError) => {
+						error.push(validationError.message);
+					});
+
+					return;
+				}
+			});
+		});
+		errors = error;
+		compared = success;
 	};
 
 	const reset = () => {
@@ -65,6 +97,9 @@
 	</ul>
 	If you are interested in my work check out my Github or LindkedIn page!
 </article>
+{#each errors as error}
+	<Error errorText={error} on:hideError={hideError} />
+{/each}
 
 {#key unique}
 	<main class="flex flex-wrap flex-row justify-evenly">
