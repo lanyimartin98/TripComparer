@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import { scale } from 'svelte/transition';
 
 	export let errorText: string;
 	const dispatch = createEventDispatcher();
@@ -12,7 +13,8 @@
 </script>
 
 <div
-	class="absolute top-5 w-1/3 right-1/3 flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-md text-red-700 bg-red-100 border border-red-300 "
+	class="fixed top-5 md:w-1/3 sm:w-2/3 md:right-1/3 sm:right-1/4 flex justify-center items-center m-1 font-medium py-1 px-2 rounded-md text-red-700 bg-red-100 border border-red-300 drop-shadow-xl text-xs"
+	transition:scale
 >
 	<div>
 		<svg

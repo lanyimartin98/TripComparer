@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
 	mode: 'jit',
 	// you dont need `purge: enabled: production` because you are using jit
@@ -11,5 +13,5 @@ module.exports = {
 		extend: {}
 	},
 	variants: {},
-	plugins: []
+	plugins: [require('@tailwindcss/line-clamp')]
 };
