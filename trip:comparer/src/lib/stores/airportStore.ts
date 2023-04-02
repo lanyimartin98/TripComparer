@@ -1,4 +1,3 @@
-import { PUBLIC_LEAN_URL } from '$env/static/public';
 import type { Airport } from '$lib/interface/Airport';
 import { trpc } from '$lib/trpc/client';
 import axios from 'axios';

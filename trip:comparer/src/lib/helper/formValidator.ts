@@ -19,8 +19,8 @@ const vehicleForm = z.object({
 	distance_unit: z.string(),
 	distance_value: z.number().gt(1),
 	vehicle_model: z.object({
-		vehicle_make_id: z.string(),
-		vehicle_model_id: z.string()
+		vehicle_make_id: z.string().min(3),
+		vehicle_model_id: z.string().min(3)
 	})
 });
 

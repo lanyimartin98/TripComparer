@@ -5,7 +5,6 @@
 	import { onMount } from 'svelte';
 	import { scale } from 'svelte/transition';
 	import axios from 'axios';
-	import { PUBLIC_LEAN_URL } from '$env/static/public';
 	import { airportStore } from '$lib/stores/airportStore';
 
 	let airports: Airport[];
@@ -69,19 +68,6 @@
 						{/each}
 					{/if}
 				</select>
-				<div class="inline-block">
-					<div class="group flex relative">
-						<a
-							href="https://www.iata.org/en/publications/directories/code-search/"
-							target="_blank"
-							class="hover:text-cyan-500"><span><i class="bi bi-question-circle" /></span></a
-						>
-						<span
-							class="w-48 text-center group-hover:opacity-100 transition-opacity bg-cyan-500 px-1 text-sm text-gray-100 rounded-md absolute left-1/2 -top-16
-						-translate-x-1/2 translate-y-full opacity-0 m-4 mx-auto">More info on IATA codes.</span
-						>
-					</div>
-				</div>
 				{#if Object.keys(flight.legs).length > 1}
 					<button on:click={() => removeLeg(leg)}><i class="bi bi-x-circle-fill" /></button>
 				{/if}

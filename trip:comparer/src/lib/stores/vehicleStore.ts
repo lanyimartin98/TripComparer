@@ -1,4 +1,3 @@
-import { PUBLIC_LEAN_URL } from '$env/static/public';
 import type { Make } from '$lib/interface/Make';
 import type { Model } from '$lib/interface/Model';
 import { trpc } from '$lib/trpc/client';

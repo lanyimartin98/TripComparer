@@ -2,7 +2,6 @@
 	import type { Vehicle } from '$lib/interface/Vehicle';
 	import { onMount } from 'svelte';
 	import axios from 'axios';
-	import { PUBLIC_LEAN_URL } from '$env/static/public';
 
 	import { scale } from 'svelte/transition';
 	import { getModelsById, makeStore } from '$lib/stores/vehicleStore';
