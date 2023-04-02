@@ -1,17 +1,17 @@
 export function GET() {
 	const resp = {
-		data: [
+		rows: [
 			{
 				GTM: '1',
 				airportId: 7,
-				codeIataAirport: 'AAH',
+				iata: 'AAH',
 				codeIataCity: 'AAH',
 				codeIcaoAirport: 'EDKA',
 				codeIso2Country: 'DE',
 				geonameId: '3207669',
 				latitudeAirport: 50.75,
 				longitudeAirport: 6.133333,
-				nameAirport: 'Aachen/Merzbruc',
+				name: 'Aachen/Merzbruc',
 				nameCountry: 'Germany',
 				phone: '',
 				timezone: 'Europe/Berlin'

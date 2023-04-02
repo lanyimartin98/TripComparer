@@ -3,18 +3,18 @@ import { initTRPC } from '@trpc/server';
 import type { Airport } from '$lib/interface/Airport';
 import type { Make } from '$lib/interface/Make';
 import type { Model } from '$lib/interface/Model';
-import { getAiports } from '$lib/data/flightLabs';
+import { getAirports } from '$lib/data/flightRadar';
 import { getMakes, getModels } from '$lib/data/carbonInterface';
 import { z } from 'zod';
 export const t = initTRPC.context<Context>().create();
 
 export const router = t.router({
 	airports: t.procedure.query(async () => {
-		const resp = await getAiports();
-		const airPorts: Airport[] = resp.data.data.map((a: any) => {
+		const resp = await getAirports();
+		const airPorts: Airport[] = resp.data.rows.map((a: any) => {
 			const airport: Airport = {
-				name: a.nameAirport,
-				IATA: a.codeIataAirport
+				name: a.name,
+				IATA: a.iata
 			};
 			return airport;
 		});
