@@ -51,7 +51,7 @@
 	};
 </script>
 
-<section class="border-cyan-500 border-2 p-4 rounded-md flex flex-col text-lg m-4" in:scale>
+<section class="backdrop-blur-md p-2 rounded-md flex flex-col text-lg m-2 border-2" in:scale>
 	<div class="flex flex-row justify-between">
 		<div>
 			<label for="type">Type:</label>

@@ -20,7 +20,10 @@
 	$: right_combined = right_results.reduce((a, b) => a + b, 0);
 </script>
 
-<article class="border-cyan-500 border-2 p-4 rounded-md flex flex-col text-lg m-4" transition:scale>
+<article
+	class="backdrop-blur-md border-2 p-4 rounded-md flex flex-col text-lg m-4"
+	transition:scale
+>
 	<div class="flex justify-evenly">
 		<div class="flex flex-col justify-center">
 			<span>Option A:</span>

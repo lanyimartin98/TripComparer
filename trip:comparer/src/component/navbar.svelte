@@ -1,5 +1,5 @@
 <nav
-	class="flex flex-row justify-between p-4 shadow-md text-2xl bg-black text-cyan-500 shadow-cyan-500"
+	class="flex flex-row justify-between m-2 p-2 shadow-md text-2xl backdrop-blur-md border-2 rounded-md"
 >
 	<h1 class="font-bold">trip:comparer</h1>
 	<div>

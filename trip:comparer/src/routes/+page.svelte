@@ -10,13 +10,15 @@
 	import { trpc } from '$lib/trpc/client';
 	import Results from '../component/results.svelte';
 	import { each } from 'svelte/internal';
+	import { TRPCClientError } from '@trpc/client';
+	import { json } from '@sveltejs/kit';
 
 	let unique = {};
 	let errors: string[] = [];
 	let expanded: boolean = false;
 	let clamp: string;
-	let left_results: number[];
-	let right_results: number[];
+	let left_results: number[] = [];
+	let right_results: number[] = [];
 
 	$: if (expanded === true) {
 		clamp = 'line-clamp-none';
@@ -61,7 +63,13 @@
 					left_results = [...left_results, estimate];
 				}
 			} catch (err) {
-				console.log(err);
+				if (err instanceof TRPCClientError) {
+					JSON.parse(err.message).forEach((e: any) => {
+						errors = [...errors, e.message];
+					});
+				} else {
+					errors = [...errors, 'Internal server error.'];
+				}
 			}
 		});
 
@@ -75,10 +83,15 @@
 					right_results = [...right_results, estimate];
 				}
 			} catch (err) {
-				console.log(err);
+				if (err instanceof TRPCClientError) {
+					JSON.parse(err.message).forEach((e: any) => {
+						errors = [...errors, e.message];
+					});
+				} else {
+					errors = [...errors, 'Internal server error.'];
+				}
 			}
 		});
-		errors = error;
 	};
 
 	const reset = () => {
@@ -92,6 +105,9 @@
 			}
 		];
 
+		left_results = [];
+		right_results = [];
+
 		tripsObj = obj;
 	};
 
@@ -101,8 +117,8 @@
 	});
 </script>
 
-<article class="bg-cyan-500 p-4">
-	<p class="lg:line-clamp-none {clamp} p-1" on:click={expand}>
+<article class="backdrop-blur-md p-4 border-2 m-2 rounded-md">
+	<p class="lg:line-clamp-none {clamp} " on:click={expand}>
 		This application is designed to measure the carbon efficiency of different travel options. By
 		providing data on the carbon footprint of each option, you can make more informed decisions
 		about how to travel in a way that minimizes your impact on the environment. Before you get
@@ -143,6 +159,6 @@
 	<button on:click={() => compare()}>Compare <i class="bi bi-search" /></button>
 	<button on:click={() => reset()}>Reset <i class="bi bi-x-circle-fill" /></button>
 </section>
-{#if left_results !== undefined && right_results !== undefined}
+{#if left_results.length > 0 && right_results.length > 0 && errors.length === 0}
 	<Results {left_results} {right_results} />
 {/if}

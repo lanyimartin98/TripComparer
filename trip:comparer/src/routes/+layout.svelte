@@ -1,6 +1,7 @@
 <script>
 	import '../app.css';
 	import Navbar from '../component/navbar.svelte';
+	import Background from '$lib/assets/bg.jpg';
 </script>
 
 <head>
@@ -11,7 +12,10 @@
 	rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
 />
-<Navbar />
-<div class="p-4 bg-black text-white">
+<div
+	class="p-4 text-white bg-hero bg-no-repeat bg-cover bg-center bg-fixed min-h-screen"
+	style="background-image: url('{Background}') ;"
+>
+	<Navbar />
 	<slot />
 </div>

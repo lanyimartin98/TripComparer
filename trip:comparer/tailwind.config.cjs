@@ -10,7 +10,9 @@ module.exports = {
 	],
 	darkMode: 'class',
 	theme: {
-		extend: {}
+		extend: {
+			forrest: "url('../public/images/hero.jpg')"
+		}
 	},
 	variants: {},
 	plugins: [require('@tailwindcss/line-clamp')]

@@ -23,7 +23,7 @@
 	};
 </script>
 
-<section class="md:w-1/2 w-full p-1">
+<section class="md:w-1/2 w-full">
 	{#each transportObjects as transObj}
 		<TransportObject
 			bind:transportObj={transObj}
