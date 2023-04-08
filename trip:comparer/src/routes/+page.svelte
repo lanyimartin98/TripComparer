@@ -12,13 +12,14 @@
 	import { each } from 'svelte/internal';
 	import { TRPCClientError } from '@trpc/client';
 	import { json } from '@sveltejs/kit';
+	import type { Result } from '$lib/interface/Result';
 
 	let unique = {};
 	let errors: string[] = [];
 	let expanded: boolean = false;
 	let clamp: string;
-	let left_results: number[] = [];
-	let right_results: number[] = [];
+	let left_results: Result[] = [];
+	let right_results: Result[] = [];
 
 	$: if (expanded === true) {
 		clamp = 'line-clamp-none';
@@ -56,10 +57,10 @@
 		tripsObj[0].transport_obj.forEach(async (transport) => {
 			try {
 				if (isFlight(transport.type)) {
-					const estimate: number = await trpc().estimatesFlight.query(transport.type);
+					const estimate: Result = await trpc().estimatesFlight.query(transport.type);
 					left_results = [...left_results, estimate];
 				} else {
-					const estimate: number = await trpc().estimatesVehicle.query(transport.type);
+					const estimate: Result = await trpc().estimatesVehicle.query(transport.type);
 					left_results = [...left_results, estimate];
 				}
 			} catch (err) {
@@ -76,10 +77,10 @@
 		tripsObj[1].transport_obj.forEach(async (transport) => {
 			try {
 				if (isFlight(transport.type)) {
-					const estimate: number = await trpc().estimatesFlight.query(transport.type);
+					const estimate: Result = await trpc().estimatesFlight.query(transport.type);
 					right_results = [...right_results, estimate];
 				} else {
-					const estimate: number = await trpc().estimatesVehicle.query(transport.type);
+					const estimate: Result = await trpc().estimatesVehicle.query(transport.type);
 					right_results = [...right_results, estimate];
 				}
 			} catch (err) {

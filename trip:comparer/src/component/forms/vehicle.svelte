@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Vehicle } from '$lib/interface/Vehicle';
 	import { onMount } from 'svelte';
-	import axios from 'axios';
 
 	import { scale } from 'svelte/transition';
 	import { getModelsById, makeStore } from '$lib/stores/vehicleStore';
