@@ -33,16 +33,12 @@
 			};
 			transportObj.type = flight;
 		} else if (value === 'Vehicle') {
-			const vehicleModel: VehicleModel = {
-				vehicle_make_id: '',
-				vehicle_model_id: ''
-			};
-
 			const vehicle: Vehicle = {
 				type: 'vehicle',
 				distance_unit: 'km',
 				distance_value: undefined,
-				vehicle_model: vehicleModel
+				vehicle_model_id: '',
+				vehicle_make: ''
 			};
 			transportObj.type = vehicle;
 		}

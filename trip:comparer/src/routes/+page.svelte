@@ -5,14 +5,18 @@
 	import { onMount } from 'svelte';
 	import { getAllAirports } from '$lib/stores/airportStore';
 	import { getAllMakes } from '$lib/stores/vehicleStore';
-	import { formValidate } from '$lib/helper/formValidator';
 	import Error from '../component/utilities/error.svelte';
+	import { isFlight, isVehicle } from '$lib/helper/typeChecker';
+	import { trpc } from '$lib/trpc/client';
+	import Results from '../component/results.svelte';
+	import { each } from 'svelte/internal';
 
-	let compared: Boolean = false;
 	let unique = {};
 	let errors: string[] = [];
 	let expanded: boolean = false;
 	let clamp: string;
+	let left_results: number[];
+	let right_results: number[];
 
 	$: if (expanded === true) {
 		clamp = 'line-clamp-none';
@@ -22,12 +26,10 @@
 
 	let tripsObj: Trip[] = [
 		{
-			transport_obj: [{ type: null }],
-			carbon_g: null
+			transport_obj: [{ type: null }]
 		},
 		{
-			transport_obj: [{ type: null }],
-			carbon_g: null
+			transport_obj: [{ type: null }]
 		}
 	];
 
@@ -45,47 +47,52 @@
 		expanded = !expanded;
 	};
 
-	const compare = () => {
-		let success: boolean = true;
+	const compare = async () => {
+		left_results = [];
+		right_results = [];
 		let error: string[] = [];
-		console.log(tripsObj);
-		tripsObj.forEach((trip) => {
-			trip.transport_obj.forEach((transport) => {
-				const validation = formValidate(transport);
-				if (validation === undefined) {
-					success = false;
-					error.push('One or more transport object(s) is/are empty!');
-					return;
+		tripsObj[0].transport_obj.forEach(async (transport) => {
+			try {
+				if (isFlight(transport.type)) {
+					const estimate: number = await trpc().estimatesFlight.query(transport.type);
+					left_results = [...left_results, estimate];
+				} else {
+					const estimate: number = await trpc().estimatesVehicle.query(transport.type);
+					left_results = [...left_results, estimate];
 				}
-				if (validation.success === false) {
-					success = false;
-					validation.error.errors.forEach((validationError) => {
-						error.push(validationError.message);
-					});
+			} catch (err) {
+				console.log(err);
+			}
+		});
 
-					return;
+		tripsObj[1].transport_obj.forEach(async (transport) => {
+			try {
+				if (isFlight(transport.type)) {
+					const estimate: number = await trpc().estimatesFlight.query(transport.type);
+					right_results = [...right_results, estimate];
+				} else {
+					const estimate: number = await trpc().estimatesVehicle.query(transport.type);
+					right_results = [...right_results, estimate];
 				}
-			});
+			} catch (err) {
+				console.log(err);
+			}
 		});
 		errors = error;
-		compared = success;
 	};
 
 	const reset = () => {
 		unique = {};
 		const obj: Trip[] = [
 			{
-				transport_obj: [{ type: null }],
-				carbon_g: null
+				transport_obj: [{ type: null }]
 			},
 			{
-				transport_obj: [{ type: null }],
-				carbon_g: null
+				transport_obj: [{ type: null }]
 			}
 		];
 
 		tripsObj = obj;
-		compared = false;
 	};
 
 	onMount(async () => {
@@ -101,7 +108,7 @@
 		about how to travel in a way that minimizes your impact on the environment. Before you get
 		started, I want to disclose that this is just a part of my developer portfolio and not an actual
 		production version. However, if you find it useful, I encourage you to consider donating to the
-		API makers FlightLabs and Carbon Interface, who have provided the underlying technology that
+		API makers FlightRadar and Carbon Interface, who have provided the underlying technology that
 		powers this application. Your support will help them continue to innovate and make their APIs
 		available for developers like myself to use in creating useful tools like this one. If you have
 		any non-API related questions, comments, or feedback, please feel free to reach out to me on
@@ -136,6 +143,6 @@
 	<button on:click={() => compare()}>Compare <i class="bi bi-search" /></button>
 	<button on:click={() => reset()}>Reset <i class="bi bi-x-circle-fill" /></button>
 </section>
-{#if compared}
-	<ResultsComponent left_carbon="0" right_carbon="0" />
+{#if left_results !== undefined && right_results !== undefined}
+	<Results {left_results} {right_results} />
 {/if}

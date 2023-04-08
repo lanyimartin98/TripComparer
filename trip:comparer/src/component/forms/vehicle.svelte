@@ -5,13 +5,14 @@
 
 	import { scale } from 'svelte/transition';
 	import { getModelsById, makeStore } from '$lib/stores/vehicleStore';
+
 	import type { Make } from '$lib/interface/Make';
 	import type { Model } from '$lib/interface/Model';
 
 	export let vehicle: Vehicle;
 
 	export let makes: Make[];
-	export let models: Model[];
+	let models: Model[];
 
 	let loadingMakes: boolean = false;
 	let loadingModels: boolean = false;
@@ -26,7 +27,7 @@
 
 	const retrieveModel = async () => {
 		loadingModels = true;
-		models = await getModelsById(vehicle.vehicle_model.vehicle_make_id);
+		models = await getModelsById(vehicle.vehicle_make);
 		loadingModels = false;
 	};
 </script>
@@ -49,8 +50,9 @@
 			<select
 				name="make"
 				id="make"
-				bind:value={vehicle.vehicle_model.vehicle_make_id}
+				bind:value={vehicle.vehicle_make}
 				on:change={retrieveModel}
+				class="w-1/3"
 			>
 				{#if makes !== undefined}
 					{#each makes as make}
@@ -62,11 +64,11 @@
 			<span class="text-white animate-pulse"><i class="bi bi-car-front" /></span>
 		{/if}
 	</div>
-	{#if vehicle.vehicle_model.vehicle_make_id !== ''}
+	{#if vehicle.vehicle_make !== ''}
 		<div in:scale>
 			<label for="model">Model:</label>
 			{#if !loadingModels}
-				<select name="model" id="model" bind:value={vehicle.vehicle_model.vehicle_model_id}>
+				<select name="model" id="model" bind:value={vehicle.vehicle_model_id} class="w-1/3">
 					{#if models !== undefined}
 						{#each models as model}
 							<option value={model.id}>{model.name}</option>

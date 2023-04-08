@@ -53,7 +53,7 @@
 		{#each flight.legs as leg}
 			<div transition:scale>
 				<label for="dep">Departure:</label>
-				<select name="dep" id="dep" bind:value={leg.departure_airport}>
+				<select name="dep" id="dep" bind:value={leg.departure_airport} class="w-1/3">
 					{#if airports !== undefined}
 						{#each airports as airport}
 							<option value={airport.IATA}>{airport.name}</option>
@@ -61,7 +61,7 @@
 					{/if}
 				</select>
 				<label for="dest">Destination:</label>
-				<select name="dest" id="dest" bind:value={leg.destination_airport}>
+				<select name="dest" id="dest" bind:value={leg.destination_airport} class="w-1/3">
 					{#if airports !== undefined}
 						{#each airports as airport}
 							<option value={airport.IATA}>{airport.name}</option>
