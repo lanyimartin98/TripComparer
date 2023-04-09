@@ -54,7 +54,8 @@ export const router = t.router({
 			const responseModels: Model[] = resp.data.map((m: any) => {
 				const model: Model = {
 					id: m.data.id,
-					name: m.data.attributes.name
+					name: m.data.attributes.name,
+					year: m.data.attributes.year
 				};
 				return model;
 			});

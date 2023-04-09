@@ -7,7 +7,7 @@ body {
 }
 
 input {
-	@apply rounded-md text-white border-white border-2 m-1 w-1/4;
+	@apply bg-transparent rounded-md text-white border-white border-2 m-1 w-1/4;
 }
 
 select {
@@ -15,7 +15,7 @@ select {
 }
 
 button {
-	@apply text-xl p-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 hover:backdrop-blur-md duration-300 hover:text-white rounded-md;
+	@apply text-xl p-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white rounded-md;
 }
 
 option {

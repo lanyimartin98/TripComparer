@@ -31,17 +31,23 @@
 	};
 </script>
 
-<article in:scale>
+<article class="pl-4" in:scale>
 	<div>
 		<label for="distance_un">Distance unit:</label>
-		<select name="distance_un" id="distance_un" bind:value={vehicle.distance_unit}>
+		<select name="distance_un" id="distance_un" bind:value={vehicle.distance_unit} class="w-1/3">
 			<option value="mi">miles</option>
 			<option value="km">kilometers</option>
 		</select>
 	</div>
 	<div>
 		<label for="distance">Distance:</label>
-		<input type="number" name="distance" id="distance" bind:value={vehicle.distance_value} />
+		<input
+			type="number"
+			name="distance"
+			id="distance"
+			bind:value={vehicle.distance_value}
+			class="w-1/3"
+		/>
 	</div>
 	<div>
 		<label for="make">Make:</label>
@@ -70,7 +76,7 @@
 				<select name="model" id="model" bind:value={vehicle.vehicle_model_id} class="w-1/3">
 					{#if models !== undefined}
 						{#each models as model}
-							<option value={model.id}>{model.name}</option>
+							<option value={model.id}>{model.name} ({model.year})</option>
 						{/each}
 					{/if}
 				</select>

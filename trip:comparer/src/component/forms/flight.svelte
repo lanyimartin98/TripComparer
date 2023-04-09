@@ -41,37 +41,45 @@
 	};
 
 	onMount(async () => {
-		airportStore.subscribe((data) => {
-			airports = data;
-		});
+		try {
+			airportStore.subscribe((data) => {
+				airports = data;
+			});
+		} catch (err) {
+			console.log(err);
+		}
 	});
 </script>
 
-<article in:scale>
+<article class="pl-4" in:scale>
 	<h3>Flights:</h3>
-	<div>
+	<div class="pl-4">
 		{#each flight.legs as leg}
-			<div transition:scale>
-				<label for="dep">Departure:</label>
-				<select name="dep" id="dep" bind:value={leg.departure_airport} class="w-1/3">
-					{#if airports !== undefined}
-						{#each airports as airport}
-							<option value={airport.IATA}>{airport.name}</option>
-						{/each}
+			<div class="flex lg:flex-row flex-col" transition:scale>
+				<div>
+					<label for="dep">Departure:</label>
+					<select name="dep" id="dep" bind:value={leg.departure_airport} class="w-1/3">
+						{#if airports !== undefined}
+							{#each airports as airport}
+								<option value={airport.IATA}>{airport.name} ({airport.IATA})</option>
+							{/each}
+						{/if}
+					</select>
+				</div>
+				<div>
+					<label for="dest">Destination:</label>
+					<select name="dest" id="dest" bind:value={leg.destination_airport} class="w-1/3">
+						{#if airports !== undefined}
+							{#each airports as airport}
+								<option value={airport.IATA}>{airport.name} ({airport.IATA})</option>
+							{/each}
+						{/if}
+					</select>
+					{#if Object.keys(flight.legs).length > 1}
+						<button on:click={() => removeLeg(leg)}><i class="bi bi-x-circle-fill" /></button>
 					{/if}
-				</select>
-				<label for="dest">Destination:</label>
-				<select name="dest" id="dest" bind:value={leg.destination_airport} class="w-1/3">
-					{#if airports !== undefined}
-						{#each airports as airport}
-							<option value={airport.IATA}>{airport.name}</option>
-						{/each}
-					{/if}
-				</select>
-				{#if Object.keys(flight.legs).length > 1}
-					<button on:click={() => removeLeg(leg)}><i class="bi bi-x-circle-fill" /></button>
-				{/if}
-				<button on:click={() => addLeg()}><i class="bi bi-plus-circle-fill" /></button>
+					<button on:click={() => addLeg()}><i class="bi bi-plus-circle-fill" /></button>
+				</div>
 			</div>
 		{/each}
 	</div>
