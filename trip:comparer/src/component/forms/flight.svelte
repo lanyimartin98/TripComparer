@@ -6,8 +6,11 @@
 	import { scale } from 'svelte/transition';
 	import axios from 'axios';
 	import { airportStore } from '$lib/stores/airportStore';
+	import { boolean } from 'zod';
 
 	let airports: Airport[];
+
+	let loading_airports: boolean = false;
 
 	export let flight: Flight;
 
@@ -42,9 +45,11 @@
 
 	onMount(async () => {
 		try {
+			loading_airports = true;
 			airportStore.subscribe((data) => {
 				airports = data;
 			});
+			loading_airports = false;
 		} catch (err) {
 			console.log(err);
 		}
@@ -58,23 +63,31 @@
 			<div class="flex lg:flex-row flex-col" transition:scale>
 				<div>
 					<label for="dep">Departure:</label>
-					<select name="dep" id="dep" bind:value={leg.departure_airport} class="w-1/3">
-						{#if airports !== undefined}
-							{#each airports as airport}
-								<option value={airport.IATA}>{airport.name} ({airport.IATA})</option>
-							{/each}
-						{/if}
-					</select>
+					{#if !loading_airports}
+						<select name="dep" id="dep" bind:value={leg.departure_airport} class="w-1/3">
+							{#if airports !== undefined}
+								{#each airports as airport}
+									<option value={airport.IATA}>{airport.name} ({airport.IATA})</option>
+								{/each}
+							{/if}
+						</select>
+					{:else}
+						<span class="text-white animate-pulse"><i class="bi bi-airplane" /></span>
+					{/if}
 				</div>
 				<div>
 					<label for="dest">Destination:</label>
-					<select name="dest" id="dest" bind:value={leg.destination_airport} class="w-1/3">
-						{#if airports !== undefined}
-							{#each airports as airport}
-								<option value={airport.IATA}>{airport.name} ({airport.IATA})</option>
-							{/each}
-						{/if}
-					</select>
+					{#if !loading_airports}
+						<select name="dest" id="dest" bind:value={leg.destination_airport} class="w-1/3">
+							{#if airports !== undefined}
+								{#each airports as airport}
+									<option value={airport.IATA}>{airport.name} ({airport.IATA})</option>
+								{/each}
+							{/if}
+						</select>
+					{:else}
+						<span class="text-white animate-pulse"><i class="bi bi-airplane" /></span>
+					{/if}
 					{#if Object.keys(flight.legs).length > 1}
 						<button on:click={() => removeLeg(leg)}><i class="bi bi-x-circle-fill" /></button>
 					{/if}

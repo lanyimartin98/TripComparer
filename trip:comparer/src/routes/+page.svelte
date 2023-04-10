@@ -13,6 +13,7 @@
 	import { TRPCClientError } from '@trpc/client';
 	import { json } from '@sveltejs/kit';
 	import type { Result } from '$lib/interface/Result';
+	import { errorStore, pushError } from '$lib/stores/errorStore';
 
 	let unique = {};
 	let errors: string[] = [];
@@ -20,6 +21,10 @@
 	let clamp: string;
 	let left_results: Result[] = [];
 	let right_results: Result[] = [];
+
+	const unsubscribe = errorStore.subscribe((err) => {
+		errors = err;
+	});
 
 	$: if (expanded === true) {
 		clamp = 'line-clamp-none';
@@ -66,10 +71,10 @@
 			} catch (err) {
 				if (err instanceof TRPCClientError) {
 					JSON.parse(err.message).forEach((e: any) => {
-						errors = [...errors, e.message];
+						pushError(e.message);
 					});
 				} else {
-					errors = [...errors, 'Internal server error.'];
+					pushError('Internal server error.');
 				}
 			}
 		});
@@ -86,10 +91,10 @@
 			} catch (err) {
 				if (err instanceof TRPCClientError) {
 					JSON.parse(err.message).forEach((e: any) => {
-						errors = [...errors, e.message];
+						pushError(e.message);
 					});
 				} else {
-					errors = [...errors, 'Internal server error.'];
+					pushError('Internal server error.');
 				}
 			}
 		});
