@@ -44,15 +44,11 @@
 	};
 
 	onMount(async () => {
-		try {
 			loading_airports = true;
 			airportStore.subscribe((data) => {
 				airports = data;
 			});
 			loading_airports = false;
-		} catch (err) {
-			console.log(err);
-		}
 	});
 </script>
 
