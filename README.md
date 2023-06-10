@@ -10,3 +10,5 @@ Trip comparer is a platform that utilizes the Carbon Interface Estimate API to c
 - Tailwind
 - Typescript
 - Carbon Interface API
+- FlightRadar API
+- TRPC

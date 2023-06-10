@@ -3,8 +3,10 @@
 - [x] Types and interfaces
 - [x] User Interface implementation
 - [x] Mock data
-- [ ] API implementation (Sending and receiving data)
-- [ ] Business Logic of Comparing
+- [x] API implementation (Sending and receiving data)
+- [x] Business Logic of Comparing
+- [ ] Error handling
+- [ ] Searchable select for aiports and cars 
 
 # Interfaces
 
