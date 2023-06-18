@@ -8,9 +8,11 @@
 	import type { Make } from '$lib/interface/Make';
 	import type { Model } from '$lib/interface/Model';
 
+	import SearchableDropdown from '../utilities/searchableDropdown.svelte';
+
 	export let vehicle: Vehicle;
 
-	export let makes: Make[];
+	let makes: Make[];
 	let models: Model[];
 
 	let loadingMakes: boolean = false;
@@ -51,7 +53,11 @@
 	</div>
 	<div>
 		<label for="make">Make:</label>
+		
 		{#if !loadingMakes}
+		{#if makes !== undefined}
+		<SearchableDropdown bind:value={vehicle.vehicle_make} bind:items={makes}/>
+		{/if}
 			<select
 				name="make"
 				id="make"
@@ -61,7 +67,7 @@
 			>
 				{#if makes !== undefined}
 					{#each makes as make}
-						<option value={make.id}>{make.name}</option>
+						<option value={make.value}>{make.name}</option>
 					{/each}
 				{/if}
 			</select>
@@ -76,7 +82,7 @@
 				<select name="model" id="model" bind:value={vehicle.vehicle_model_id} class="w-1/3">
 					{#if models !== undefined}
 						{#each models as model}
-							<option value={model.id}>{model.name} ({model.year})</option>
+							<option value={model.value}>{model.name} ({model.year})</option>
 						{/each}
 					{/if}
 				</select>

@@ -1,4 +1,4 @@
 export interface Make {
 	name: String;
-	id: String;
+	value: String;
 }

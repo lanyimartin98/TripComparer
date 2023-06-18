@@ -63,7 +63,7 @@
 						<select name="dep" id="dep" bind:value={leg.departure_airport} class="w-1/3">
 							{#if airports !== undefined}
 								{#each airports as airport}
-									<option value={airport.IATA}>{airport.name} ({airport.IATA})</option>
+									<option value={airport.value}>{airport.name} ({airport.value})</option>
 								{/each}
 							{/if}
 						</select>
@@ -77,7 +77,7 @@
 						<select name="dest" id="dest" bind:value={leg.destination_airport} class="w-1/3">
 							{#if airports !== undefined}
 								{#each airports as airport}
-									<option value={airport.IATA}>{airport.name} ({airport.IATA})</option>
+									<option value={airport.value}>{airport.name} ({airport.value})</option>
 								{/each}
 							{/if}
 						</select>

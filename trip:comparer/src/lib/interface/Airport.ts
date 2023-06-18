@@ -1,4 +1,4 @@
 export interface Airport {
-	IATA: string;
+	value: string;
 	name: string;
 }
