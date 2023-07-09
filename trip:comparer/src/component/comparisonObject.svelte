@@ -23,7 +23,7 @@
 	};
 </script>
 
-<section class="md:w-1/2 w-full">
+<section class="md:w-1/2 w-full relative">
 	{#each transportObjects as transObj}
 		<TransportObject
 			bind:transportObj={transObj}
@@ -32,7 +32,7 @@
 		/>
 	{/each}
 	<div class="flex items-center justify-center">
-		<button on:click={() => addTransObject()}
+		<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => addTransObject()}
 			>Add transobject <i class="bi bi-plus-circle-fill" /></button
 		>
 	</div>

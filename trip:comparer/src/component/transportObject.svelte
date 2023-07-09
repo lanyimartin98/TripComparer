@@ -51,7 +51,7 @@
 	};
 </script>
 
-<section class="backdrop-blur-md p-2 rounded-md flex flex-col text-lg m-2 border-2" in:scale>
+<section class="relative backdrop-blur-md p-2 rounded-md flex flex-col text-lg m-2 border-2" in:scale>
 	<div class="flex flex-row justify-between">
 		<div>
 			<label for="type">Type:</label>
@@ -62,7 +62,7 @@
 		</div>
 
 		{#if numberOfTransportObjects > 1}
-			<button><i class="bi bi-x-circle-fill" on:click={() => deleteTransportObject()} /></button>
+			<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white"><i class="bi bi-x-circle-fill" on:click={() => deleteTransportObject()} /></button>
 		{/if}
 	</div>
 	{#if transport === 'Flight'}

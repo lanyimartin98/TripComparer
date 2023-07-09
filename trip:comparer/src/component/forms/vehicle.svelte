@@ -15,21 +15,18 @@
 	let makes: Make[];
 	let models: Model[];
 
-	let loadingMakes: boolean = false;
-	let loadingModels: boolean = false;
-
 	onMount(async () => {
-		loadingMakes = true;
 		makeStore.subscribe((data) => {
 			makes = data;
 		});
-		loadingMakes = false;
 	});
 
-	const retrieveModel = async () => {
-		loadingModels = true;
-		models = await getModelsById(vehicle.vehicle_make);
-		loadingModels = false;
+	$: {
+		if(vehicle.vehicle_make!==''){
+		getModelsById(vehicle.vehicle_make).then(m=>{
+			models=m;
+		})
+	}
 	};
 </script>
 
@@ -53,39 +50,15 @@
 	</div>
 	<div>
 		<label for="make">Make:</label>
-		
-		{#if !loadingMakes}
 		{#if makes !== undefined}
 		<SearchableDropdown bind:value={vehicle.vehicle_make} bind:items={makes}/>
-		{/if}
-			<select
-				name="make"
-				id="make"
-				bind:value={vehicle.vehicle_make}
-				on:change={retrieveModel}
-				class="w-1/3"
-			>
-				{#if makes !== undefined}
-					{#each makes as make}
-						<option value={make.value}>{make.name}</option>
-					{/each}
-				{/if}
-			</select>
-		{:else}
-			<span class="text-white animate-pulse"><i class="bi bi-car-front" /></span>
 		{/if}
 	</div>
 	{#if vehicle.vehicle_make !== ''}
 		<div in:scale>
 			<label for="model">Model:</label>
-			{#if !loadingModels}
-				<select name="model" id="model" bind:value={vehicle.vehicle_model_id} class="w-1/3">
-					{#if models !== undefined}
-						{#each models as model}
-							<option value={model.value}>{model.name} ({model.year})</option>
-						{/each}
-					{/if}
-				</select>
+			{#if models!==undefined}
+			<SearchableDropdown bind:value={vehicle.vehicle_model_id} bind:items={models}/>
 			{:else}
 				<span class="text-white animate-pulse"><i class="bi bi-car-front" /></span>
 			{/if}

@@ -14,7 +14,7 @@ export const router = t.router({
 		const resp = await getAirports();
 		const airPorts: Airport[] = resp.data.rows.map((a: any) => {
 			const airport: Airport = {
-				name: a.name,
+				name: a.name+' ('+a.iata+')',
 				value: a.iata
 			};
 			return airport;
@@ -37,7 +37,7 @@ export const router = t.router({
 		const responseModels: Model[] = resp.data.map((m: any) => {
 			const model: Model = {
 				value: m.data.id,
-				name: m.data.attributes.name,
+				name: m.data.attributes.name +' ('+m.data.attributes.year+')',
 				year: m.data.attributes.year
 			};
 			return model;
