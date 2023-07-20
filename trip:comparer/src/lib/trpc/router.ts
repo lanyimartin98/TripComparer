@@ -5,8 +5,11 @@ import type { Make } from '$lib/interface/Make';
 import type { Model } from '$lib/interface/Model';
 import { getAirports } from '$lib/data/flightRadar';
 import { getEstimate, getMakes, getModels } from '$lib/data/carbonInterface';
+import { flightSchema,vehicleSchema } from '$lib/helper/schemas';
 import { z } from 'zod';
 import type { Result } from '$lib/interface/Result';
+
+
 export const t = initTRPC.context<Context>().create();
 
 export const router = t.router({
@@ -45,18 +48,7 @@ export const router = t.router({
 		return responseModels;
 	}),
 	estimatesFlight: t.procedure
-		.input(
-			z.object({
-				type: z.string().includes('flight'),
-				passengers: z.number(),
-				legs: z.array(
-					z.object({
-						departure_airport: z.string().max(3).min(3),
-						destination_airport: z.string().max(3).min(3)
-					})
-				)
-			})
-		)
+		.input(flightSchema)
 		.query(async ({ input }) => {
 			const resp = await getEstimate(input);
 			const result: Result = {
@@ -69,15 +61,7 @@ export const router = t.router({
 		}),
 
 	estimatesVehicle: t.procedure
-		.input(
-			z.object({
-				type: z.string().includes('vehicle'),
-				distance_unit: z.string(),
-				distance_value: z.number().gt(1),
-				vehicle_make: z.string().min(3),
-				vehicle_model_id: z.string().min(3)
-			})
-		)
+		.input(vehicleSchema)
 		.query(async ({ input }) => {
 			const resp = await getEstimate(input);
 			const result: Result = {
