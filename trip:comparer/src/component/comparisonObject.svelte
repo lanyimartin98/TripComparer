@@ -5,9 +5,9 @@
 	export let transportObjects: TransportObj[];
 
 	const addTransObject = () => {
-		console.log(transportObjects);
 		const newTransObject: TransportObj = {
-			type: null
+			type: null,
+			formValid:false
 		};
 		const combinedTransportObject = transportObjects.concat(newTransObject);
 		transportObjects = combinedTransportObject;

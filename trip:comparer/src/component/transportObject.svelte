@@ -66,9 +66,9 @@
 		{/if}
 	</div>
 	{#if transport === 'Flight'}
-		<FlightForm bind:flight={transportObj.type} />
+		<FlightForm bind:flight={transportObj.type} bind:formValid={transportObj.formValid}/>
 	{:else if transport === 'Vehicle'}
-		<VehicleForm bind:vehicle={transportObj.type} />
+		<VehicleForm bind:vehicle={transportObj.type} bind:formValid={transportObj.formValid}/>
 	{/if}
 </section>
 

@@ -10,7 +10,11 @@
 
 	import SearchableDropdown from '../utilities/searchableDropdown.svelte';
 
+	import {vehicleSchema} from '$lib/helper/schemas';
+
 	export let vehicle: Vehicle;
+
+	export let formValid:boolean=false;
 
 	let makes: Make[];
 	let models: Model[];
@@ -28,6 +32,12 @@
 		})
 	}
 	};
+
+	$:if(vehicleSchema.safeParse(vehicle).success){
+		formValid=true;
+	}else{
+		formValid=false;
+	}
 </script>
 
 <article class="pl-4" in:scale>

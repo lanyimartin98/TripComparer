@@ -21,6 +21,7 @@
 	let clamp: string;
 	let left_results: Result[] = [];
 	let right_results: Result[] = [];
+	let comparisonDisabled=true;
 
 	let closed: boolean = false;
 
@@ -34,12 +35,14 @@
 		clamp = 'line-clamp-3';
 	}
 
+	
+
 	let tripsObj: Trip[] = [
 		{
-			transport_obj: [{ type: null }]
+			transport_obj: [{ type: null,formValid:false }]
 		},
 		{
-			transport_obj: [{ type: null }]
+			transport_obj: [{ type: null,formValid:false }]
 		}
 	];
 
@@ -72,7 +75,6 @@
 				}
 			} catch (err) {
 				if (err instanceof TRPCClientError) {
-					console.log(err);
 					JSON.parse(err.message).forEach((e: any) => {
 						pushError(e.message);
 					});
@@ -107,10 +109,10 @@
 		unique = {};
 		const obj: Trip[] = [
 			{
-				transport_obj: [{ type: null }]
+				transport_obj: [{ type: null,formValid:false }]
 			},
 			{
-				transport_obj: [{ type: null }]
+				transport_obj: [{ type: null,formValid:false }]
 			}
 		];
 
@@ -123,6 +125,24 @@
 	const close = () => {
 		closed = !closed;
 	};
+
+	const checkFormValidity=(leftTrip:Trip,rightTrip:Trip)=>{
+		let valid:boolean=true;
+		leftTrip.transport_obj.forEach(t=>{
+			if(!t.formValid){
+				valid=false;
+			}
+		})
+		rightTrip.transport_obj.forEach(t=>{
+			if(!t.formValid){
+				valid=false;
+			}
+		})
+		return valid;
+	}
+
+	$:comparisonDisabled=!checkFormValidity(tripsObj[0],tripsObj[1]);
+
 
 	onMount(async () => {
 		getAllAirports();
@@ -182,7 +202,7 @@
 	</main>
 {/key}
 <section class="flex justify-center">
-	<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => compare()}>Compare <i class="bi bi-search" /></button>
+	<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white disabled:text-gray disabled:opacity-75" on:click={() => compare()} disabled={comparisonDisabled}>Compare <i class="bi bi-search"/></button>
 	<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => reset()}>Reset <i class="bi bi-x-circle-fill" /></button>
 </section>
 {#if left_results.length > 0 && right_results.length > 0 && errors.length === 0}
