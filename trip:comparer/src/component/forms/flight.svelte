@@ -4,15 +4,16 @@
 	import type { Leg } from '$lib/interface/Leg';
 	import { onMount } from 'svelte';
 	import { scale } from 'svelte/transition';
-	import axios from 'axios';
 	import { airportStore } from '$lib/stores/airportStore';
-	import { boolean } from 'zod';
+	import{flightSchema} from '$lib/helper/schemas';
 
 	import SearchableDropdown from '../utilities/searchableDropdown.svelte';
 
 	let airports: Airport[];
 
 	let loading_airports: boolean = false;
+
+	let formValid:boolean=false;
 
 	export let flight: Flight;
 
@@ -52,6 +53,14 @@
 			});
 			loading_airports = false;
 	});
+
+	$:if(flightSchema.safeParse(flight).success){
+		formValid=true;
+	}else{
+		formValid=false;
+	}
+
+	
 </script>
 
 <article class="pl-4 relative" in:scale>
