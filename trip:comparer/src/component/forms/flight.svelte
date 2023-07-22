@@ -13,7 +13,7 @@
 
 	let loading_airports: boolean = false;
 
-	let formValid:boolean=false;
+	export let formValid:boolean=false;
 
 	export let flight: Flight;
 

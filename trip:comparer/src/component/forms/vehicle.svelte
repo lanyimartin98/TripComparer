@@ -14,7 +14,7 @@
 
 	export let vehicle: Vehicle;
 
-	let formValid:boolean=false;
+	export let formValid:boolean=false;
 
 	let makes: Make[];
 	let models: Model[];
