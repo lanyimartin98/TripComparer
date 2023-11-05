@@ -23,3 +23,4 @@ jobs:
         working-directory: trip:comparer
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: trip:comparer
