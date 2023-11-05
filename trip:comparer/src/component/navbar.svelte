@@ -9,7 +9,7 @@
 	<h1 class="font-bold p-1 lg:block hidden"><a href="/">trip:comparer</a></h1>
 	<a class="lg:hidden text-base p-1" href="/" on:click={openClosePanel}>About</a>
 	<a class="text-base p-1" href="/compare" on:click={openClosePanel}>Compare</a>
-	<a class=" text-base p-1" href="/license" on:click={openClosePanel}>Licensing</a>
+	<a class=" text-base p-1" href="/license.html" on:click={openClosePanel}>Licensing</a>
 </div>
 {/key}
 </div>
