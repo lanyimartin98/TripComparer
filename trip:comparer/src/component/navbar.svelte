@@ -5,7 +5,7 @@
 
 <button class="lg:hidden"><i class="bi {icon}" on:click={openClosePanel}></i></button>
 {#key animateHelper}
-<div class="lg:flex lg:flex-row lg:items-center flex-col {panelOpen}" transition:slide>
+<div class="lg:flex lg:flex-row lg:items-center flex-col {panelOpen}" transition:screenSizeBasedSlide>
 	<h1 class="font-bold p-1 lg:block hidden"><a href="/">trip:comparer</a></h1>
 	<a class="lg:hidden text-base p-1" href="/" on:click={openClosePanel}>About</a>
 	<a class="text-base p-1" href="/compare" on:click={openClosePanel}>Compare</a>
@@ -26,6 +26,10 @@
 	let isOpen=false;
 	let panelOpen="hidden";
 	let icon="bi-list";
+
+	const screenSizeBasedSlide=(node)=>{
+		return window.screen.width<1024 ? slide(node) : null;
+	}
 
 	let animateHelper = {}
 
