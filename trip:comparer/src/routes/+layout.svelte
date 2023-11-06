@@ -2,6 +2,9 @@
 	import '../app.css';
 	import Navbar from '../component/navbar.svelte';
 	import Background from '$lib/assets/bg.jpg';
+
+	export const prerender=true;
+	export const ssr=false;
 </script>
 
 <head>
