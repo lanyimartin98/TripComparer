@@ -1,7 +1,7 @@
 <script>
 	import '../app.css';
 	import Navbar from '../component/navbar.svelte';
-	import Background from '$lib/assets/bg.jpg';
+	import Background from '$lib/assets/bg.webp';
 
 	export const prerender=true;
 	export const ssr=false;
