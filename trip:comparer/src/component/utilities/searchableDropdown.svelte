@@ -3,14 +3,8 @@
     export let value:any;
     export let items:any[];
 
-    let displayedItems:any[];
+    let displayedItems:any[]=[];
     let searchWord:string="";
-
-    $:displayItems=items.filter(item=>{
-      if(item.name.includes(searchWord)){
-        return item;
-      }
-    });
 
     let visible=false;
     let droppedDown="hidden";
@@ -22,6 +16,16 @@
         displayedName=item.name;
       }
     })
+
+    $:if(searchWord!==""){
+      displayedItems=items.filter(item=>{
+      if(item.name.toUpperCase().includes(searchWord.toUpperCase())){
+        return item;
+      }
+    });
+    }else{
+      displayedItems=[];
+    }
 
 
     $:if(visible){
@@ -48,12 +52,16 @@
     </button>
 <div class="{droppedDown} w-full relative rounded-md bg-transparent p-2 text-left text-white border-white border-2 m-2 z-40">
 <input type="text" bind:value={searchWord} class="w-full border-white border-2 text-white">
+{#if displayedItems.length>0}
     <ul class="max-h-36 overflow-auto w-full focus:outline-none sm:text-sm rounded-md p-1" tabindex="-1" role="listbox">
-      {#each displayItems as item}
+      {#each displayedItems as item}
       <li class="text-white text-left w-full hover:bg-blue-600 hover:text-white rounded-md p-1">
         <label class="text-left"><input type=radio bind:group={value} value={item.value} name="item" class="hidden" on:change={dropDown}/>{item.name}</label>
       </li>
       {/each}
     </ul>
+    {:else}
+    <div>Start typing!</div>
+    {/if}
   </div>
   </div>
