@@ -56,12 +56,12 @@
     <ul class="max-h-36 overflow-auto w-full focus:outline-none sm:text-sm rounded-md p-1" tabindex="-1" role="listbox">
       {#each displayedItems as item}
       <li class="text-white text-left w-full hover:bg-blue-600 hover:text-white rounded-md p-1">
-        <label class="text-left"><input type=radio bind:group={value} value={item.value} name="item" class="hidden" on:change={dropDown}/>{item.name}</label>
+        <label class="text-left truncate"><input type=radio bind:group={value} value={item.value} name="item" class="hidden" on:change={dropDown}/>{item.name}</label>
       </li>
       {/each}
     </ul>
     {:else}
-    <div>Start typing!</div>
+    <div class="text-center">Start typing to see results!</div>
     {/if}
   </div>
   </div>
