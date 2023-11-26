@@ -83,18 +83,18 @@
 					{/if}
 					<div class="flex flex-row">
 					{#if Object.keys(flight.legs).length > 1}
-						<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => removeLeg(leg)}><i class="bi bi-x-circle-fill" /></button>
+						<button id="removeAirportLeg" aria-label="Remove airport leg" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => removeLeg(leg)}><i class="bi bi-x-circle-fill" /></button>
 					{/if}
-					<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => addLeg()}><i class="bi bi-plus-circle-fill" /></button>
+					<button id="addAirportLeg" aria-label="Add airport leg" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => addLeg()}><i class="bi bi-plus-circle-fill" /></button>
 				</div>
 				</div>
 		{/each}
 	</div>
 	<div>
 		<label for="Passengers">Passengers:</label>
-		<button class="text-sm hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => decreasePassenger()}><i class="bi bi-dash" /></button>
+		<button id="decreasePassengerNumber" aria-label="Decrease passenger number" class="text-sm hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => decreasePassenger()}><i class="bi bi-dash" /></button>
 		<span>{flight.passengers}</span>
-		<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => increasePassenger()}><i class="bi bi-plus" /></button>
+		<button id="increasePassengerNumber" aria-label="Increase passenger number" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => increasePassenger()}><i class="bi bi-plus" /></button>
 	</div>
 </article>
 

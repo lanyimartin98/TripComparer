@@ -64,7 +64,7 @@
 		</div>
 
 		{#if numberOfTransportObjects > 1}
-			<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white"><i class="bi bi-x-circle-fill" on:click={() => deleteTransportObject()} /></button>
+			<button id="deleteTransportObject" aria-label="Delete transport object" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white"><i class="bi bi-x-circle-fill" on:click={() => deleteTransportObject()} /></button>
 		{/if}
 	</div>
 	{#if transportObj.typeAsString === 'Flight'}

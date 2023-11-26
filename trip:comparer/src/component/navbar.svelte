@@ -3,7 +3,7 @@
 >
 <div>
 
-<button class="lg:hidden"><i class="bi {icon}" on:click={openClosePanel}></i></button>
+<button id="panelCloser" aria-label="Close panel" class="lg:hidden"><i class="bi {icon}" on:click={openClosePanel}></i></button>
 {#key animateHelper}
 <div class="lg:flex lg:flex-row lg:items-center flex-col {panelOpen}" transition:screenSizeBasedSlide>
 	<h1 class="font-bold p-1 lg:block hidden"><a href="/">trip:comparer</a></h1>

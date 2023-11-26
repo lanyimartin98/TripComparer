@@ -146,8 +146,8 @@
 	</main>
 {/key}
 <section class="flex justify-center" transition:slide>
-	<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white disabled:text-gray disabled:opacity-75" on:click={() => compare()} disabled={comparisonDisabled}>Compare <i class="bi bi-search"/></button>
-	<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => reset()}>Reset <i class="bi bi-x-circle-fill" /></button>
+	<button id="compare" aria-label="Compare transport objects" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white disabled:text-gray disabled:opacity-75" on:click={() => compare()} disabled={comparisonDisabled}>Compare <i class="bi bi-search"/></button>
+	<button id="reset" aria-label="Reset" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => reset()}>Reset <i class="bi bi-x-circle-fill" /></button>
 </section>
 {#if left_results.length > 0 && right_results.length > 0 && errors.length === 0}
 	<Results {left_results} {right_results} />

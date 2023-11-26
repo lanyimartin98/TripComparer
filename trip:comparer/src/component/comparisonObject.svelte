@@ -34,8 +34,8 @@
 		/>
 	{/each}
 	<div class="flex items-center justify-center">
-		<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => addTransObject()}
-			transition:scale>Add transobject <i class="bi bi-plus-circle-fill" /></button
+		<button id="addTransportObject" aria-label="Add transport object" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => addTransObject()}
+			transition:scale>Add transportobject <i class="bi bi-plus-circle-fill" /></button
 		>
 	</div>
 </section>
