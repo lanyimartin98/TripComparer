@@ -22,6 +22,7 @@
 	};
 
 	const decreasePassenger = () => {
+		console.log(flight)
 		if (flight.passengers > 1) {
 			flight.passengers--;
 		}
@@ -63,7 +64,7 @@
 	
 </script>
 
-<article class="pl-4 relative" in:scale>
+<article class="pl-4 relative" transition:scale>
 	<h3>Flights:</h3>
 	<div class="pl-4">
 		{#each flight.legs as leg}

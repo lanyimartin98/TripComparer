@@ -1,7 +1,10 @@
 <script lang="ts">
+  import {slide} from 'svelte/transition';
 
     export let value:any;
     export let items:any[];
+
+    let animateHelper={};
 
     let displayedItems:any[]=[];
     let searchWord:string="";
@@ -37,6 +40,7 @@
 
     const dropDown=()=>{
       visible=!visible;
+      animateHelper={};
     }
 
 </script>
@@ -50,7 +54,8 @@
         </svg>
       </span>
     </button>
-<div class="{droppedDown} w-full relative rounded-md bg-transparent p-2 text-left text-white border-white border-2 m-2 z-40">
+    {#key animateHelper}
+<div class="{droppedDown} w-full relative rounded-md bg-transparent p-2 text-left text-white border-white border-2 m-2 z-40" transition:slide>
 <input type="text" bind:value={searchWord} class="w-full border-white border-2 text-white">
 {#if displayedItems.length>0}
     <ul class="max-h-36 overflow-auto w-full focus:outline-none sm:text-sm rounded-md p-1" tabindex="-1" role="listbox">
@@ -64,4 +69,5 @@
     <div class="text-center">Start typing to see results!</div>
     {/if}
   </div>
+  {/key}
   </div>

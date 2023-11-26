@@ -1,7 +1,7 @@
 import type { Leg } from './Leg';
 
 export interface Flight {
-	type: 'Flight';
+	type: 'flight';
 	passengers: number;
 	legs: Leg[];
 }

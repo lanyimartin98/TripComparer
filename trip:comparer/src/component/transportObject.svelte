@@ -7,10 +7,12 @@
 
 	import FlightForm from './forms/flight.svelte';
 	import VehicleForm from './forms/vehicle.svelte';
-	import { scale } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	import { createEventDispatcher, onMount } from 'svelte';
 
-	$: changeTransport(transportObj.typeAsString);
+	$: changeTransport(transport);
+
+	let transport='';
 
 	export let transportObj: TransportObj;
 	export let numberOfTransportObjects: number;
@@ -20,7 +22,7 @@
 	const changeTransport = (value: string) => {
 		if (value === 'Flight') {
 			const flight: Flight = {
-				type: 'Flight',
+				type: 'flight',
 				passengers: 1,
 				legs: [
 					{
@@ -30,14 +32,16 @@
 				]
 			};
 			transportObj.type = flight;
+			transportObj.typeAsString="Flight"
 		} else if (value === 'Vehicle') {
 			const vehicle: Vehicle = {
-				type: 'Vehicle',
+				type: 'vehicle',
 				distance_unit: 'km',
 				distance_value: undefined,
 				vehicle_model_id: '',
 				vehicle_make: ''
 			};
+			transportObj.typeAsString="Vehicle"
 			transportObj.type = vehicle;
 		}
 	};
@@ -49,11 +53,11 @@
 	};
 </script>
 
-<section class="relative backdrop-blur-md p-2 rounded-md flex flex-col text-lg m-2 border-2" in:scale>
+<section class="relative backdrop-blur-md p-2 rounded-md flex flex-col text-lg m-2 border-2" transition:slide>
 	<div class="flex flex-row justify-between">
 		<div>
 			<label for="type">Type:</label>
-			<select name="type" bind:value={transportObj.typeAsString}>
+			<select name="type" bind:value={transport}>
 				<option value="Flight">flight</option>
 				<option value="Vehicle">vehicle</option>
 			</select>
