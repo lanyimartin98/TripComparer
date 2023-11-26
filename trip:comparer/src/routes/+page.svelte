@@ -1,4 +1,9 @@
-	<article class="backdrop-blur-md p-4 border-2 m-2 rounded-md">
+	<script>
+		import {slide} from 'svelte/transition';
+	</script>
+	
+	
+	<article class="backdrop-blur-md p-4 border-2 m-2 rounded-md" transition:slide>
 		<p>
 			This application is designed to measure the carbon efficiency of different travel options. By
 			providing data on the carbon footprint of each option, you can make more informed decisions

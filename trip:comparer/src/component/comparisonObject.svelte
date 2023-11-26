@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { TransportObj } from '$lib/interface/TransportObj';
 	import TransportObject from './transportObject.svelte';
+	import {scale} from 'svelte/transition';
 
 	export let transportObjects: TransportObj[];
 
@@ -34,7 +35,7 @@
 	{/each}
 	<div class="flex items-center justify-center">
 		<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => addTransObject()}
-			>Add transobject <i class="bi bi-plus-circle-fill" /></button
+			transition:scale>Add transobject <i class="bi bi-plus-circle-fill" /></button
 		>
 	</div>
 </section>

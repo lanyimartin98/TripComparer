@@ -21,7 +21,7 @@
 </nav>
 
 <script>
-	import {slide, scale} from 'svelte/transition';
+	import {slide} from 'svelte/transition';
 
 	let isOpen=false;
 	let panelOpen="hidden";

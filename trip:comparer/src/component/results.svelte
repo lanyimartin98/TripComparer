@@ -2,7 +2,7 @@
 	import type { Result } from '$lib/interface/Result';
 	import type { Trip } from '$lib/interface/Trip';
 	import { each, identity } from 'svelte/internal';
-	import { scale } from 'svelte/transition';
+	import {slide } from 'svelte/transition';
 	import ComparisonObject from './comparisonObject.svelte';
 
 	export let left_results: Result[];
@@ -45,7 +45,7 @@
 
 <article
 	class="backdrop-blur-md border-2 p-2 rounded-md flex flex-col text-lg m-2"
-	transition:scale
+	transition:slide
 >
 	<div class="flex justify-between p-2">
 		<div>Results</div>

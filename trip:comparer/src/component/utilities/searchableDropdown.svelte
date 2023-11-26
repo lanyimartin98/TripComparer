@@ -14,13 +14,23 @@
 
     let displayedName="";
 
+    let message='';
+
+    $:if(searchWord.length>=3){
+      message='No results found!'
+    }else if(searchWord.length===0){
+      message='Start typing to see results!';
+    }else{
+      message='Just a little more...';
+    }
+
     $:items.forEach((item)=>{
       if(item.value===value){
         displayedName=item.name;
       }
     })
 
-    $:if(searchWord!==""){
+    $:if(searchWord.length>2){
       displayedItems=items.filter(item=>{
       if(item.name.toUpperCase().includes(searchWord.toUpperCase())){
         return item;
@@ -66,7 +76,7 @@
       {/each}
     </ul>
     {:else}
-    <div class="text-center">Start typing to see results!</div>
+    <div class="text-center">{message}</div>
     {/if}
   </div>
   {/key}

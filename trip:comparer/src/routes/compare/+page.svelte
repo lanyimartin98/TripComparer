@@ -13,6 +13,7 @@
 	import { TRPCClientError } from '@trpc/client';
 	import type { Result } from '$lib/interface/Result';
 	import { errorStore, pushError } from '$lib/stores/errorStore';
+	import {slide} from 'svelte/transition';
 
 	let unique = {};
 	let errors: string[] = [];
@@ -139,12 +140,12 @@
 {/each}
 
 {#key unique}
-	<main class="flex flex-wrap flex-row justify-evenly">
+	<main class="flex flex-wrap flex-row justify-evenly" transition:slide>
 		<ComparisonObject bind:transportObjects={tripsObj[0].transport_obj} />
 		<ComparisonObject bind:transportObjects={tripsObj[1].transport_obj} />
 	</main>
 {/key}
-<section class="flex justify-center">
+<section class="flex justify-center" transition:slide>
 	<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white disabled:text-gray disabled:opacity-75" on:click={() => compare()} disabled={comparisonDisabled}>Compare <i class="bi bi-search"/></button>
 	<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => reset()}>Reset <i class="bi bi-x-circle-fill" /></button>
 </section>
