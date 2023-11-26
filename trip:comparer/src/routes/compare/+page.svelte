@@ -29,10 +29,10 @@
 
 	let tripsObj: Trip[] = [
 		{
-			transport_obj: [{ type: null,formValid:false }]
+			transport_obj: [{ type: null,formValid:false ,typeAsString:''}]
 		},
 		{
-			transport_obj: [{ type: null,formValid:false }]
+			transport_obj: [{ type: null,formValid:false,typeAsString:'' }]
 		}
 	];
 
@@ -96,10 +96,10 @@
 		unique = {};
 		const obj: Trip[] = [
 			{
-				transport_obj: [{ type: null,formValid:false }]
+				transport_obj: [{ type: null,formValid:false ,typeAsString:''}]
 			},
 			{
-				transport_obj: [{ type: null,formValid:false }]
+				transport_obj: [{ type: null,formValid:false ,typeAsString:''}]
 			}
 		];
 
