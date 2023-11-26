@@ -8,21 +8,19 @@
 	import FlightForm from './forms/flight.svelte';
 	import VehicleForm from './forms/vehicle.svelte';
 	import { scale } from 'svelte/transition';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 
-	$: changeTransport(transport);
+	$: changeTransport(transportObj.typeAsString);
 
 	export let transportObj: TransportObj;
 	export let numberOfTransportObjects: number;
 
 	const dispatch = createEventDispatcher();
 
-	let transport = '';
-
-	const changeTransport = (value: String) => {
+	const changeTransport = (value: string) => {
 		if (value === 'Flight') {
 			const flight: Flight = {
-				type: 'flight',
+				type: 'Flight',
 				passengers: 1,
 				legs: [
 					{
@@ -34,7 +32,7 @@
 			transportObj.type = flight;
 		} else if (value === 'Vehicle') {
 			const vehicle: Vehicle = {
-				type: 'vehicle',
+				type: 'Vehicle',
 				distance_unit: 'km',
 				distance_value: undefined,
 				vehicle_model_id: '',
@@ -55,7 +53,7 @@
 	<div class="flex flex-row justify-between">
 		<div>
 			<label for="type">Type:</label>
-			<select name="type" bind:value={transport}>
+			<select name="type" bind:value={transportObj.typeAsString}>
 				<option value="Flight">flight</option>
 				<option value="Vehicle">vehicle</option>
 			</select>
@@ -65,9 +63,9 @@
 			<button class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white"><i class="bi bi-x-circle-fill" on:click={() => deleteTransportObject()} /></button>
 		{/if}
 	</div>
-	{#if transport === 'Flight'}
+	{#if transportObj.typeAsString === 'Flight'}
 		<FlightForm bind:flight={transportObj.type} bind:formValid={transportObj.formValid}/>
-	{:else if transport === 'Vehicle'}
+	{:else if transportObj.typeAsString === 'Vehicle'}
 		<VehicleForm bind:vehicle={transportObj.type} bind:formValid={transportObj.formValid}/>
 	{/if}
 </section>

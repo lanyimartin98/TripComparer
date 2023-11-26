@@ -7,19 +7,20 @@
 	const addTransObject = () => {
 		const newTransObject: TransportObj = {
 			type: null,
-			formValid:false
+			formValid:false,
+			typeAsString:''
 		};
 		const combinedTransportObject = transportObjects.concat(newTransObject);
 		transportObjects = combinedTransportObject;
 	};
 
 	const deleteTransportObject = (event: any) => {
-		const filteredTransportObejcts = transportObjects.filter((t) => {
+		const filteredTransportObjects = transportObjects.filter((t) => {
 			if (t !== event.detail.object) {
 				return t;
 			}
 		});
-		transportObjects = filteredTransportObejcts;
+		transportObjects = filteredTransportObjects;
 	};
 </script>
 
