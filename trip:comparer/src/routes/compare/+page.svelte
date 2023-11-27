@@ -13,27 +13,24 @@
 	import { TRPCClientError } from '@trpc/client';
 	import type { Result } from '$lib/interface/Result';
 	import { errorStore, pushError } from '$lib/stores/errorStore';
-	import {slide} from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 
 	let unique = {};
 	let errors: string[] = [];
 	let left_results: Result[] = [];
 	let right_results: Result[] = [];
-	let comparisonDisabled=true;
-
+	let comparisonDisabled = true;
 
 	const unsubscribe = errorStore.subscribe((err) => {
 		errors = err;
 	});
 
-	
-
 	let tripsObj: Trip[] = [
 		{
-			transport_obj: [{ type: null,formValid:false ,typeAsString:''}]
+			transport_obj: [{ type: null, formValid: false, typeAsString: '' }]
 		},
 		{
-			transport_obj: [{ type: null,formValid:false,typeAsString:'' }]
+			transport_obj: [{ type: null, formValid: false, typeAsString: '' }]
 		}
 	];
 
@@ -46,7 +43,6 @@
 		});
 		errors = filteredErrors;
 	};
-
 
 	const compare = async () => {
 		left_results = [];
@@ -97,10 +93,10 @@
 		unique = {};
 		const obj: Trip[] = [
 			{
-				transport_obj: [{ type: null,formValid:false ,typeAsString:''}]
+				transport_obj: [{ type: null, formValid: false, typeAsString: '' }]
 			},
 			{
-				transport_obj: [{ type: null,formValid:false ,typeAsString:''}]
+				transport_obj: [{ type: null, formValid: false, typeAsString: '' }]
 			}
 		];
 
@@ -110,24 +106,22 @@
 		tripsObj = obj;
 	};
 
-
-	const checkFormValidity=(leftTrip:Trip,rightTrip:Trip)=>{
-		let valid:boolean=true;
-		leftTrip.transport_obj.forEach(t=>{
-			if(!t.formValid){
-				valid=false;
+	const checkFormValidity = (leftTrip: Trip, rightTrip: Trip) => {
+		let valid: boolean = true;
+		leftTrip.transport_obj.forEach((t) => {
+			if (!t.formValid) {
+				valid = false;
 			}
-		})
-		rightTrip.transport_obj.forEach(t=>{
-			if(!t.formValid){
-				valid=false;
+		});
+		rightTrip.transport_obj.forEach((t) => {
+			if (!t.formValid) {
+				valid = false;
 			}
-		})
+		});
 		return valid;
-	}
+	};
 
-	$:comparisonDisabled=!checkFormValidity(tripsObj[0],tripsObj[1]);
-
+	$: comparisonDisabled = !checkFormValidity(tripsObj[0], tripsObj[1]);
 
 	onMount(async () => {
 		getAllAirports();
@@ -146,8 +140,19 @@
 	</main>
 {/key}
 <section class="flex justify-center" transition:slide>
-	<button id="compare" aria-label="Compare transport objects" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white disabled:text-gray disabled:opacity-75" on:click={() => compare()} disabled={comparisonDisabled}>Compare <i class="bi bi-search"/></button>
-	<button id="reset" aria-label="Reset" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => reset()}>Reset <i class="bi bi-x-circle-fill" /></button>
+	<button
+		id="compare"
+		aria-label="Compare transport objects"
+		class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white disabled:text-gray disabled:opacity-75"
+		on:click={() => compare()}
+		disabled={comparisonDisabled}>Compare <i class="bi bi-search" /></button
+	>
+	<button
+		id="reset"
+		aria-label="Reset"
+		class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white"
+		on:click={() => reset()}>Reset <i class="bi bi-x-circle-fill" /></button
+	>
 </section>
 {#if left_results.length > 0 && right_results.length > 0 && errors.length === 0}
 	<Results {left_results} {right_results} />

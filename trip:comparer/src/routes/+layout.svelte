@@ -2,10 +2,10 @@
 	import '../app.css';
 	import Navbar from '../component/navbar.svelte';
 	import Background from '$lib/assets/bg.webp';
-	import "bootstrap-icons/font/bootstrap-icons.css";
+	import 'bootstrap-icons/font/bootstrap-icons.css';
 
-	export const prerender=true;
-	export const ssr=false;
+	export const prerender = true;
+	export const ssr = false;
 </script>
 
 <head>

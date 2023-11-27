@@ -10,11 +10,11 @@
 
 	import SearchableDropdown from '../utilities/searchableDropdown.svelte';
 
-	import {vehicleSchema} from '$lib/helper/schemas';
+	import { vehicleSchema } from '$lib/helper/schemas';
 
 	export let vehicle: Vehicle;
 
-	export let formValid:boolean=false;
+	export let formValid: boolean = false;
 
 	let makes: Make[];
 	let models: Model[];
@@ -26,17 +26,17 @@
 	});
 
 	$: {
-		if(vehicle.vehicle_make!==''){
-		getModelsById(vehicle.vehicle_make).then(m=>{
-			models=m;
-		})
+		if (vehicle.vehicle_make !== '') {
+			getModelsById(vehicle.vehicle_make).then((m) => {
+				models = m;
+			});
+		}
 	}
-	};
 
-	$:if(vehicleSchema.safeParse(vehicle).success){
-		formValid=true;
-	}else{
-		formValid=false;
+	$: if (vehicleSchema.safeParse(vehicle).success) {
+		formValid = true;
+	} else {
+		formValid = false;
 	}
 </script>
 
@@ -61,14 +61,14 @@
 	<div>
 		<label for="make">Make:</label>
 		{#if makes !== undefined}
-		<SearchableDropdown bind:value={vehicle.vehicle_make} bind:items={makes}/>
+			<SearchableDropdown bind:value={vehicle.vehicle_make} bind:items={makes} />
 		{/if}
 	</div>
 	{#if vehicle.vehicle_make !== ''}
 		<div in:scale>
 			<label for="model">Model:</label>
-			{#if models!==undefined}
-			<SearchableDropdown bind:value={vehicle.vehicle_model_id} bind:items={models}/>
+			{#if models !== undefined}
+				<SearchableDropdown bind:value={vehicle.vehicle_model_id} bind:items={models} />
 			{:else}
 				<span class="text-white animate-pulse"><i class="bi bi-car-front" /></span>
 			{/if}

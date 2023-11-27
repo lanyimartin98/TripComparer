@@ -2,7 +2,7 @@
 	import type { Result } from '$lib/interface/Result';
 	import type { Trip } from '$lib/interface/Trip';
 	import { each, identity } from 'svelte/internal';
-	import {slide } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	import ComparisonObject from './comparisonObject.svelte';
 
 	export let left_results: Result[];

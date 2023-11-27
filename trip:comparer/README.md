@@ -6,7 +6,7 @@
 - [x] API implementation (Sending and receiving data)
 - [x] Business Logic of Comparing
 - [ ] Error handling
-- [ ] Searchable select for aiports and cars 
+- [ ] Searchable select for aiports and cars
 
 # Interfaces
 

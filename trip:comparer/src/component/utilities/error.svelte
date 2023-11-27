@@ -34,7 +34,7 @@
 			<line x1="12" y1="16" x2="12.01" y2="16" />
 		</svg>
 	</div>
-	<div class="text-xl font-normal  max-w-full flex-initial">{errorText}</div>
+	<div class="text-xl font-normal max-w-full flex-initial">{errorText}</div>
 	<div class="flex flex-auto flex-row-reverse">
 		<div on:click={hideError}>
 			<svg

@@ -3,6 +3,6 @@ import type { Vehicle } from './Vehicle';
 
 export interface TransportObj {
 	type: Flight | Vehicle | null;
-	formValid:boolean;
-	typeAsString:string;
+	formValid: boolean;
+	typeAsString: string;
 }
