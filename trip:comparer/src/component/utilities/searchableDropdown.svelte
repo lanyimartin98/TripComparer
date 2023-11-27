@@ -1,5 +1,6 @@
 <script lang="ts">
   import {slide} from 'svelte/transition';
+  import { v4 as uuidv4 } from 'uuid';
 
     export let value:any;
     export let items:any[];
@@ -56,7 +57,7 @@
 </script>
 
   <div class="relative p-2">
-    <button id="toggleDropdown" aria-label="Toggle dropdown" type="button" class="w-full relative h-10 rounded-md bg-transparent p-2 text-left text-white border-white border-2 m-2 focus:outline-none lg:text-sm text-xs hover:scale-100" on:click={dropDown}>
+    <button id="toggleDropdown_{uuidv4()}" aria-label="Toggle dropdown" type="button" class="w-full relative h-10 rounded-md bg-transparent p-2 text-left text-white border-white border-2 m-2 focus:outline-none lg:text-sm text-xs hover:scale-100" on:click={dropDown}>
       <span>{displayedName}</span>
       <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
         <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

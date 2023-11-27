@@ -2,6 +2,7 @@
 	import type { TransportObj } from '$lib/interface/TransportObj';
 	import TransportObject from './transportObject.svelte';
 	import {scale} from 'svelte/transition';
+	import { v4 as uuidv4 } from 'uuid';
 
 	export let transportObjects: TransportObj[];
 
@@ -34,8 +35,8 @@
 		/>
 	{/each}
 	<div class="flex items-center justify-center">
-		<button id="addTransportObject" aria-label="Add transport object" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => addTransObject()}
-			transition:scale>Add transportobject <i class="bi bi-plus-circle-fill" /></button
+		<button id="addTransportObject_{uuidv4()}" aria-label="Add transportobject" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" on:click={() => addTransObject()}
+			transition:scale>Add transportobject<i class="bi bi-plus-circle-fill" /></button
 		>
 	</div>
 </section>

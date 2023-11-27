@@ -37,5 +37,5 @@
 		
 	</article>
 	<div class="flex items-center justify-center">
-	<a href="/compare" class="text-xl p-1 transition ease-in-out delay-150 rounded-md hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white"><i class="bi bi-caret-right-fill"></i> Start comparing!</a>
+	<a href="/compare" class="text-xl p-1 transition ease-in-out delay-150 rounded-md hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white" aria-label="Start comparing!"><i class="bi bi-caret-right-fill"></i> Start comparing!</a>
 	</div>

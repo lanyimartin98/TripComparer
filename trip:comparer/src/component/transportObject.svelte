@@ -9,6 +9,7 @@
 	import VehicleForm from './forms/vehicle.svelte';
 	import { slide } from 'svelte/transition';
 	import { createEventDispatcher, onMount } from 'svelte';
+	import { v4 as uuidv4 } from 'uuid';
 
 	$: changeTransport(transport);
 
@@ -57,14 +58,14 @@
 	<div class="flex flex-row justify-between">
 		<div>
 			<label for="type">Type:</label>
-			<select name="type" bind:value={transport}>
+			<select id="type" name="type" bind:value={transport}>
 				<option value="Flight">flight</option>
 				<option value="Vehicle">vehicle</option>
 			</select>
 		</div>
 
 		{#if numberOfTransportObjects > 1}
-			<button id="deleteTransportObject" aria-label="Delete transport object" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white"><i class="bi bi-x-circle-fill" on:click={() => deleteTransportObject()} /></button>
+			<button id="deleteTransportObject_{uuidv4()}" aria-label="Delete transport object" class="hover:-translate-y-1 hover:scale-105 duration-300 hover:text-white"><i class="bi bi-x-circle-fill" on:click={() => deleteTransportObject()} /></button>
 		{/if}
 	</div>
 	{#if transportObj.typeAsString === 'Flight'}
