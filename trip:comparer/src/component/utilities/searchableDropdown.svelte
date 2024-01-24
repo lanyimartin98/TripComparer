@@ -28,6 +28,8 @@
 	$: items.forEach((item) => {
 		if (item.value === value) {
 			displayedName = item.name;
+		} else {
+			displayedName = '';
 		}
 	});
 
