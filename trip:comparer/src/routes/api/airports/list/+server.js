@@ -15,7 +15,22 @@ export function GET() {
 				nameCountry: 'Germany',
 				phone: '',
 				timezone: 'Europe/Berlin'
-			}
+			},
+			{
+				GTM: '1',
+				airportId: 8,
+				iata: 'BUD',
+				codeIataCity: 'BUD',
+				codeIcaoAirport: 'EDKA',
+				codeIso2Country: 'DE',
+				geonameId: '3207669',
+				latitudeAirport: 50.75,
+				longitudeAirport: 6.133333,
+				name: 'Budapest',
+				nameCountry: 'Germany',
+				phone: '',
+				timezone: 'Europe/Berlin'
+			},
 		]
 	};
 	return new Response(JSON.stringify(resp));

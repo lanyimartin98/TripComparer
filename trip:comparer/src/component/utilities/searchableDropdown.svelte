@@ -25,13 +25,15 @@
 		message = 'Just a little more...';
 	}
 
-	$: items.forEach((item) => {
-		if (item.value === value) {
-			displayedName = item.name;
-		} else {
-			displayedName = '';
-		}
-	});
+	$: if (value) {
+		items.forEach((item) => {
+			if (item.value === value) {
+				displayedName = item.name;
+			}
+		});
+	} else {
+		displayedName = '';
+	}
 
 	$: if (searchWord.length > 2) {
 		displayedItems = items.filter((item) => {
